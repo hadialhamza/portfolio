@@ -1,6 +1,9 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 // eslint-disable-next-line
 import { motion, AnimatePresence } from "framer-motion";
+import gsap from "gsap";
+import { useGSAP } from "@gsap/react";
+import { TextPlugin } from "gsap/TextPlugin";
 import {
   FiSun,
   FiMoon,
@@ -17,9 +20,24 @@ import {
 } from "react-icons/fi";
 import { Link } from "react-scroll";
 
+gsap.registerPlugin(useGSAP, TextPlugin);
+
 const Navbar = ({ darkMode, setDarkMode }) => {
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
+  const container = useRef();
+
+  useGSAP(
+    () => {
+      const tl = gsap.timeline({ repeat: -1, repeatDelay: 2, yoyo: true });
+      tl.to(".logo-text", {
+        duration: 2,
+        text: "Hadi Hamza",
+        ease: "none",
+      });
+    },
+    { scope: container }
+  );
 
   useEffect(() => {
     const handleScroll = () => {
@@ -40,6 +58,7 @@ const Navbar = ({ darkMode, setDarkMode }) => {
   return (
     <>
       <motion.nav
+        ref={container}
         className={`fixed z-50 transition-all duration-500 ease-in-out ${
           scrolled
             ? "top-4 left-1/2 -translate-x-1/2 w-[90%] md:w-auto rounded-full bg-white/70 dark:bg-slate-900/70 backdrop-blur-md border-2 border-white/20 shadow-lg py-2"
@@ -58,11 +77,14 @@ const Navbar = ({ darkMode, setDarkMode }) => {
             className="min-w-[200px] text-xl md:text-2xl font-normal text-primary font-body tracking-wider cursor-pointer"
             whileHover={{ scale: 1.05 }}
           >
-            &lt;{" "}
-            <span className="text-slate-900 dark:text-white font-logo font-medium">
-              Hadi Hamza
+            <span className="animate-pulse">&lt; </span>
+            <span className="text-slate-900 dark:text-white font-logo font-medium inline-block min-w-[120px]">
+              <span className="logo-text"></span>
+              <span className="animate-pulse font-body text-primary">
+                {" "}
+                /&gt;
+              </span>
             </span>{" "}
-            /&gt;
           </motion.div>
 
           {/* Desktop Menu */}
