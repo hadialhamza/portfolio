@@ -7,10 +7,10 @@ import {
   FiLayers,
   FiLayout,
   FiSmartphone,
-  FiChevronRight,
   FiChevronLeft,
+  FiChevronRight,
 } from "react-icons/fi";
-import { Layers, Layout, Smartphone } from "lucide-react";
+import { FolderOpen } from "lucide-react";
 
 // Project data
 const projects = [
@@ -86,7 +86,7 @@ const LayoutBento = () => (
           />
           <div className="absolute inset-0 bg-black/40 group-hover:bg-black/30 transition-colors duration-500" />
           <div
-            className={`absolute inset-0 opacity-0 group-hover:opacity-40 transition-opacity duration-500 bg-gradient-to-br ${project.gradient}`}
+            className={`absolute inset-0 opacity-0 group-hover:opacity-40 transition-opacity duration-500 bg-linear-to-br ${project.gradient}`}
           />
         </div>
 
@@ -105,7 +105,7 @@ const LayoutBento = () => (
             </p>
           </div>
 
-          <div className="absolute top-6 right-6 flex gap-2 opacity-0 group-hover:opacity-100 transition-all duration-300 translate-y-[-10px] group-hover:translate-y-0">
+          <div className="absolute top-6 right-6 flex gap-2 opacity-0 group-hover:opacity-100 transition-all duration-300 -translate-y-2.5 group-hover:translate-y-0">
             {project.github && (
               <a
                 href={project.github}
@@ -144,14 +144,13 @@ const LayoutSplit = () => (
         } gap-8 md:gap-16 items-center`}
       >
         <motion.div
-          initial={{ opacity: 0, scale: 0.9 }}
-          whileInView={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 0.5 }}
-          viewport={{ once: true, margin: "-100px" }}
+          initial={{ opacity: 0, scale: 0.95 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 0.3 }}
           className="w-full md:w-1/2 relative group"
         >
           <div
-            className={`absolute -inset-4 bg-gradient-to-r ${project.gradient} rounded-3xl blur-2xl opacity-20 group-hover:opacity-40 transition-opacity duration-500`}
+            className={`absolute -inset-4 bg-linear-to-r ${project.gradient} rounded-3xl blur-2xl opacity-20 group-hover:opacity-40 transition-opacity duration-500`}
           />
           <div className="relative rounded-xl overflow-hidden border border-slate-200 dark:border-indigo-500/20 shadow-2xl bg-white dark:bg-slate-900/50 backdrop-blur-sm aspect-video">
             <div className="h-8 bg-slate-100 dark:bg-slate-800/80 border-b border-slate-200 dark:border-white/5 flex items-center px-4 gap-2">
@@ -170,15 +169,14 @@ const LayoutSplit = () => (
 
         <motion.div
           initial={{ opacity: 0, x: i % 2 === 0 ? 50 : -50 }}
-          whileInView={{ opacity: 1, x: 0 }}
-          transition={{ duration: 0.5, delay: 0.2 }}
-          viewport={{ once: true }}
+          animate={{ opacity: 1, x: 0 }}
+          transition={{ duration: 0.3 }}
           className="w-full md:w-1/2"
         >
           <div className="flex items-center gap-3 mb-4">
             <span className={`h-px w-8 ${project.color}`} />
             <span
-              className={`text-sm font-bold tracking-wider uppercase bg-clip-text text-transparent bg-gradient-to-r ${project.gradient}`}
+              className={`text-sm font-bold tracking-wider uppercase bg-clip-text text-transparent bg-linear-to-r ${project.gradient}`}
             >
               {project.category}
             </span>
@@ -269,12 +267,12 @@ const LayoutCinema = () => {
           <motion.div
             key={project.id}
             initial={{ opacity: 0, scale: 0.95 }}
-            whileInView={{ opacity: 1, scale: 1 }}
-            viewport={{ once: true }}
-            className="flex-shrink-0 w-[85vw] md:w-[600px] snap-center relative rounded-3xl overflow-hidden bg-white dark:bg-slate-900/50 backdrop-blur-sm border border-slate-200 dark:border-indigo-500/10 shadow-2xl group"
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.3 }}
+            className="shrink-0 w-[85vw] md:w-[600px] snap-center relative rounded-3xl overflow-hidden bg-white dark:bg-slate-900/50 backdrop-blur-sm border border-slate-200 dark:border-indigo-500/10 shadow-2xl group"
           >
             <div className="h-64 md:h-80 overflow-hidden relative">
-              <div className="absolute inset-0 bg-gradient-to-t from-slate-900/80 to-transparent z-10 opacity-60" />
+              <div className="absolute inset-0 bg-linear-to-t from-slate-900/80 to-transparent z-10 opacity-60" />
               <img
                 src={project.image}
                 alt={project.title}
@@ -359,15 +357,9 @@ export default function WebsiteMockup() {
 
   return (
     <section
-      id="showcase"
-      className="py-20 px-6 relative overflow-hidden bg-white dark:bg-slate-900 transition-colors duration-300"
+      id="projects"
+      className="py-20 px-6 relative overflow-hidden bg-slate-50 dark:bg-slate-900 transition-colors duration-300"
     >
-      {/* Background Effects */}
-      <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        <div className="absolute w-96 h-96 bg-indigo-500/5 dark:bg-indigo-500/10 rounded-full blur-3xl top-0 right-0"></div>
-        <div className="absolute w-96 h-96 bg-purple-500/5 dark:bg-purple-500/10 rounded-full blur-3xl bottom-0 left-0"></div>
-      </div>
-
       <div className="max-w-7xl mx-auto relative z-10">
         {/* --- HEADER & SWITCHER --- */}
         <div className="mb-20 flex flex-col items-center">
@@ -378,14 +370,12 @@ export default function WebsiteMockup() {
             viewport={{ once: true }}
             className="text-center mb-10"
           >
-            <span className="inline-block py-1 px-3 rounded-full bg-zinc-900 border border-zinc-800 text-xs font-medium text-zinc-400 mb-4">
+            <span className="inline-flex items-center gap-2 py-1 px-3 rounded-full bg-primary/10 border border-primary/20 text-sm font-medium text-primary mb-4">
+              <FolderOpen size={14} />
               My Work
             </span>
-            <h2 className="text-4xl md:text-6xl font-bold mb-4 text-white tracking-tight">
-              Project{" "}
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-indigo-400 to-cyan-400">
-                Showcase
-              </span>
+            <h2 className="text-4xl md:text-6xl font-bold mb-4 text-slate-900 dark:text-white tracking-tight">
+              Project <span className="text-primary">Showcase</span>
             </h2>
             <p className="text-zinc-400 text-lg max-w-lg mx-auto">
               Explore my technical journey through different lenses.
@@ -399,7 +389,7 @@ export default function WebsiteMockup() {
                 onClick={() => setActiveLayout("bento")}
                 className={`flex items-center gap-2 px-4 py-2 rounded-md text-sm font-medium transition-all ${
                   activeLayout === "bento"
-                    ? "bg-indigo-500 text-white shadow-lg"
+                    ? "bg-primary/90 text-slate-900 shadow-lg"
                     : "text-slate-400 hover:text-white"
                 }`}
               >
@@ -409,7 +399,7 @@ export default function WebsiteMockup() {
                 onClick={() => setActiveLayout("split")}
                 className={`flex items-center gap-2 px-4 py-2 rounded-md text-sm font-medium transition-all ${
                   activeLayout === "split"
-                    ? "bg-indigo-500 text-white shadow-lg"
+                    ? "bg-primary/90 text-slate-900 shadow-lg"
                     : "text-slate-400 hover:text-white"
                 }`}
               >
@@ -419,7 +409,7 @@ export default function WebsiteMockup() {
                 onClick={() => setActiveLayout("cinema")}
                 className={`flex items-center gap-2 px-4 py-2 rounded-md text-sm font-medium transition-all ${
                   activeLayout === "cinema"
-                    ? "bg-indigo-500 text-white shadow-lg"
+                    ? "bg-primary/90 text-slate-900 shadow-lg"
                     : "text-slate-400 hover:text-white"
                 }`}
               >
@@ -436,7 +426,8 @@ export default function WebsiteMockup() {
               key="bento"
               initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -10 }}
+              exit={{ opacity: 0, y: -10, transition: { duration: 0.1 } }}
+              transition={{ duration: 0.3 }}
             >
               <LayoutBento />
             </motion.div>
@@ -447,7 +438,8 @@ export default function WebsiteMockup() {
               key="split"
               initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -10 }}
+              exit={{ opacity: 0, y: -10, transition: { duration: 0.1 } }}
+              transition={{ duration: 0.3 }}
             >
               <LayoutSplit />
             </motion.div>
@@ -458,7 +450,8 @@ export default function WebsiteMockup() {
               key="cinema"
               initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -10 }}
+              exit={{ opacity: 0, y: -10, transition: { duration: 0.1 } }}
+              transition={{ duration: 0.3 }}
             >
               <LayoutCinema />
             </motion.div>

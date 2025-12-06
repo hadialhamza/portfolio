@@ -1,13 +1,5 @@
 import React from "react";
-import { motion } from "framer-motion";
-import {
-  Github,
-  Linkedin,
-  Mail,
-  Heart,
-  Twitter,
-  ArrowUpRight,
-} from "lucide-react";
+import { Github, Linkedin, Mail, Heart, ArrowUpRight } from "lucide-react";
 
 const Footer = () => {
   const currentYear = new Date().getFullYear();
@@ -17,21 +9,22 @@ const Footer = () => {
       icon: <Github size={20} />,
       href: "https://github.com/hadialhamza",
       label: "GitHub",
+      color: "text-black bg-zinc-200",
+      shadow: "hover:shadow-xl shadow-white/40",
     },
     {
       icon: <Linkedin size={20} />,
       href: "https://linkedin.com/in/hadialhamza",
       label: "LinkedIn",
-    },
-    {
-      icon: <Twitter size={20} />,
-      href: "https://twitter.com",
-      label: "Twitter",
+      color: "text-white bg-[#0077b5]",
+      shadow: "hover:shadow-xl shadow-[#0077b5]/40",
     },
     {
       icon: <Mail size={20} />,
       href: "mailto:hadialhamza@gmail.com",
       label: "Email",
+      color: "text-white bg-[#ea4335]",
+      shadow: "hover:shadow-xl shadow-[#ea4335]/40",
     },
   ];
 
@@ -40,17 +33,15 @@ const Footer = () => {
   return (
     <footer className="bg-black border-t border-white/10 relative overflow-hidden">
       {/* Background decoration */}
-      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-3xl h-[1px] bg-gradient-to-r from-transparent via-indigo-500 to-transparent opacity-50" />
+      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-3xl h-px bg-linear-to-r from-transparent via-indigo-500 to-transparent opacity-50" />
       <div className="absolute -top-24 left-1/2 -translate-x-1/2 w-[600px] h-[300px] bg-indigo-500/10 rounded-full blur-[100px] pointer-events-none" />
 
       <div className="max-w-7xl mx-auto px-6 pt-20 pb-10 relative z-10">
         <div className="grid grid-cols-1 md:grid-cols-12 gap-12 mb-16">
           {/* Brand Column */}
           <div className="md:col-span-5 space-y-6">
-            <h3 className="text-3xl font-bold tracking-tighter text-white">
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-indigo-400 to-cyan-400">
-                &lt;Hadi Al Hamza /&gt;
-              </span>
+            <h3 className="text-3xl font-bold tracking-tighter text-primary">
+              <span>&lt; Hadi Al Hamza /&gt;</span>
             </h3>
             <p className="text-zinc-400 leading-relaxed max-w-sm">
               Crafting digital experiences with pixel-perfect precision.
@@ -59,20 +50,16 @@ const Footer = () => {
             </p>
             <div className="flex gap-4">
               {socialLinks.map((social, index) => (
-                <motion.a
+                <a
                   key={index}
                   href={social.href}
                   target="_blank"
                   rel="noopener noreferrer"
-                  whileHover={{
-                    y: -3,
-                    backgroundColor: "rgba(255, 255, 255, 0.1)",
-                  }}
-                  className="w-10 h-10 flex items-center justify-center rounded-full bg-zinc-900 border border-white/10 text-zinc-400 hover:text-white hover:border-white/20 transition-colors"
+                  className={`w-10 h-10 flex items-center justify-center rounded-full border border-white/10 hover:-translate-y-1 transition-all duration-300 ${social.color} ${social.shadow}`}
                   aria-label={social.label}
                 >
                   {social.icon}
-                </motion.a>
+                </a>
               ))}
             </div>
           </div>
@@ -80,14 +67,14 @@ const Footer = () => {
           {/* Quick Links */}
           <div className="md:col-span-3 md:col-start-7">
             <h4 className="text-white font-semibold mb-6">Navigation</h4>
-            <ul className="space-y-3">
+            <ul className="flex flex-col gap-2">
               {quickLinks.map((item) => (
                 <li key={item}>
                   <a
                     href={`#${item.toLowerCase()}`}
-                    className="group flex items-center gap-2 text-zinc-400 hover:text-indigo-400 transition-colors text-sm"
+                    className="group flex items-center gap-2 text-zinc-400 hover:text-primary hover:translate-x-2 transition-all duration-200 text-sm"
                   >
-                    <span className="w-1.5 h-1.5 rounded-full bg-zinc-700 group-hover:bg-indigo-400 transition-colors" />
+                    <span className="w-1.5 h-1.5 rounded-full bg-zinc-700 group-hover:bg-primary transition-all" />
                     {item}
                   </a>
                 </li>
@@ -103,7 +90,7 @@ const Footer = () => {
             </p>
             <a
               href="mailto:hadialhamza@gmail.com"
-              className="inline-flex items-center gap-2 text-indigo-400 hover:text-indigo-300 font-medium transition-colors"
+              className="inline-flex items-center gap-2 text-primary hover:scale-105 font-medium transition-colors"
             >
               Send an email <ArrowUpRight size={16} />
             </a>
@@ -119,8 +106,8 @@ const Footer = () => {
           <p className="text-zinc-500 text-sm flex items-center gap-2">
             Made with{" "}
             <Heart
-              size={14}
-              className="text-red-500 fill-red-500/20 animate-pulse"
+              size={20}
+              className="text-primary fill-primary/60 animate-pulse"
             />{" "}
             using React & Tailwind
           </p>

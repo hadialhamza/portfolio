@@ -4,7 +4,7 @@ import { motion } from "framer-motion";
 import { LuCodeXml } from "react-icons/lu";
 import { SiExpress, SiMongodb } from "react-icons/si";
 import { TbBrandReact } from "react-icons/tb";
-import { FaNodeJs, FaLaptopCode } from "react-icons/fa";
+import { FaNodeJs, FaLaptopCode, FaGithub } from "react-icons/fa";
 import { Typewriter } from "react-simple-typewriter";
 
 const SocialButton = ({ icon: Icon, href, label, hoverColor, shadowColor }) => (
@@ -12,10 +12,10 @@ const SocialButton = ({ icon: Icon, href, label, hoverColor, shadowColor }) => (
     href={href}
     target="_blank"
     rel="noopener noreferrer"
-    className={`p-3 rounded-full  text-slate-600 dark:text-white transition-all border border-slate-300 dark:border-slate-700 cursor-pointer ${hoverColor} ${shadowColor} hover:shadow-xl hover:-translate-y-1`}
+    className={`p-3 rounded-full text-slate-600 dark:text-white transition-all border border-slate-300 dark:border-slate-700 cursor-pointer ${hoverColor} ${shadowColor} hover:shadow-2xl hover:-translate-y-1`}
     aria-label={label}
   >
-    <Icon size={20} />
+    <Icon size={25} />
   </a>
 );
 
@@ -113,25 +113,25 @@ const Hero = () => {
 
             <div className="flex gap-4">
               <SocialButton
-                icon={Github}
+                icon={FaGithub}
                 href="https://github.com/hadialhamza"
                 label="GitHub"
-                hoverColor="bg-slate-900"
-                shadowColor="shadow-lg shadow-gray-500/30"
+                hoverColor="bg-white/90 text-black!"
+                shadowColor="shadow-xl shadow-gray-500/30"
               />
               <SocialButton
                 icon={Linkedin}
                 href="https://linkedin.com/in/hadialhamza"
                 label="LinkedIn"
                 hoverColor="bg-[#0077b5]"
-                shadowColor="shadow-lg shadow-[#0077b5]/30"
+                shadowColor="shadow-xl shadow-[#0077b5]/30"
               />
               <SocialButton
                 icon={Mail}
                 href="mailto:hadialhamza@gmail.com"
                 label="Email"
                 hoverColor="bg-red-500"
-                shadowColor="shadow-lg shadow-red-500/30"
+                shadowColor="shadow-xl shadow-red-500/30"
               />
             </div>
           </div>
@@ -146,7 +146,7 @@ const Hero = () => {
         >
           <div className="group relative w-72 h-80 md:w-96 md:h-112 border-2 border-primary rounded-2xl">
             <div className="group absolute -top-5 -left-5 w-full h-full bg-slate-800 rounded-2xl overflow-hidden shadow-2xl shadow-primary/30 dark:shadow-primary/50 transition-transform duration-500 hover:translate-y-5 hover:translate-x-5">
-              <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent z-10 opacity-80"></div>
+              <div className="absolute inset-0 bg-linear-to-t from-black/90 via-black/20 to-transparent z-10 opacity-80"></div>
               <img
                 src="/public/hamza.jpg"
                 alt="Hadi Al Hamza"

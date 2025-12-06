@@ -41,19 +41,17 @@ const Navbar = ({ darkMode, setDarkMode }) => {
   return (
     <>
       <motion.nav
-        className={`fixed z-50 transition-all duration-500 ease-in-out ${
-          scrolled
+        className={`fixed z-50 transition-all duration-500 ease-in-out ${scrolled
             ? "top-4 left-1/2 -translate-x-1/2 w-[90%] md:w-auto rounded-full bg-white/70 dark:bg-slate-900/70 backdrop-blur-md border-2 border-white/20 shadow-lg py-2"
             : "top-0 left-0 right-0 w-full py-6 bg-transparent"
-        }`}
+          }`}
         initial={{ y: -100 }}
         animate={{ y: 0 }}
         transition={{ duration: 0.5 }}
       >
         <div
-          className={`mx-auto px-6 flex justify-between items-center ${
-            scrolled ? "max-w-7xl w-full md:gap-8" : "max-w-7xl"
-          }`}
+          className={`mx-auto px-6 flex justify-between items-center ${scrolled ? "max-w-7xl w-full md:gap-8" : "max-w-7xl"
+            }`}
         >
           <motion.div
             className="w-[200px] text-xl md:text-2xl font-normal text-primary font-body tracking-wider cursor-pointer"

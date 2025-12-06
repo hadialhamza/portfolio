@@ -1,13 +1,8 @@
-
-
-import React, { useRef } from "react";
-import { motion, useInView } from "framer-motion";
-import { Code2, Zap, Heart, Terminal } from "lucide-react";
+import React from "react";
+import { motion } from "framer-motion";
+import { Code2, Zap, Heart, Terminal, User } from "lucide-react";
 
 const About = () => {
-  const ref = useRef(null);
-  const isInView = useInView(ref, { once: true, margin: "-100px" });
-
   const containerVariants = {
     hidden: { opacity: 0 },
     visible: {
@@ -61,46 +56,41 @@ const About = () => {
   return (
     <section
       id="about"
-      className="relative min-h-screen flex items-center py-24 bg-white dark:bg-slate-900 overflow-hidden transition-colors duration-300"
+      className="relative min-h-screen flex items-center py-24 bg-slate-50 dark:bg-slate-900 overflow-hidden transition-colors duration-300"
     >
-      {/* Ambient Background Glows */}
-      <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-indigo-500/10 rounded-full blur-[120px] -translate-y-1/2 translate-x-1/2 pointer-events-none" />
-      <div className="absolute bottom-0 left-0 w-[500px] h-[500px] bg-purple-500/10 rounded-full blur-[120px] translate-y-1/2 -translate-x-1/2 pointer-events-none" />
-
-      <div ref={ref} className="max-w-7xl mx-auto px-6 relative z-10">
+      <div className="max-w-7xl mx-auto px-6 text-center relative z-10">
         {/* Section Header */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
-          animate={isInView ? { opacity: 1, y: 0 } : {}}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
           transition={{ duration: 0.6 }}
           className="mb-16 md:mb-24"
         >
-          <span className="inline-block py-1 px-3 rounded-full bg-primary/10 border border-primary/20 text-xs font-medium text-primary mb-4">
+          <span className="inline-flex items-center gap-2 py-1 px-3 rounded-full bg-primary/10 border border-primary/20 text-sm font-medium text-primary mb-4">
+            <User size={14} />
             About Me
           </span>
           <h2 className="text-4xl md:text-6xl font-bold tracking-tight text-slate-900 dark:text-white">
-            Behind the <br />
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-indigo-500 via-purple-500 to-cyan-500 dark:from-indigo-400 dark:via-purple-400 dark:to-cyan-400">
-              lines of code.
-            </span>
+            Behind the <span className="text-primary">lines of code.</span>
           </h2>
         </motion.div>
 
-        <div className="grid md:grid-cols-12 gap-12 md:gap-20 items-start">
+        <div className="grid md:grid-cols-12 gap-12 md:gap-16 items-start text-start">
           {/* Left Column: Bio Text */}
           <motion.div
-            className="md:col-span-6 space-y-8"
+            className="md:col-span-6 space-y-8 p-6 rounded-2xl bg-white dark:bg-zinc-900/40 border border-slate-200 dark:border-white/5 backdrop-blur-sm "
             initial={{ opacity: 0, x: -30 }}
-            animate={isInView ? { opacity: 1, x: 0 } : {}}
+            whileInView={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.6, delay: 0.2 }}
           >
-            <h3 className="text-2xl font-semibold text-slate-900 dark:text-zinc-100">
+            <h3 className="text-2xl font-semibold text-zinc-100">
               Hello! I'm a{" "}
-              <span className="text-indigo-600 dark:text-indigo-400">MERN Stack Developer</span>{" "}
+              <span className="text-indigo-400">MERN Stack Developer</span>{" "}
               based in the cloud.
             </h3>
 
-            <div className="space-y-6 text-lg text-slate-600 dark:text-zinc-400 leading-relaxed">
+            <div className="space-y-6 text-lg text-zinc-400 leading-relaxed">
               <p>
                 My journey began with a curiosity for how things work on the
                 internet, which quickly evolved into a passion for building
@@ -124,7 +114,7 @@ const About = () => {
 
             {/* Quick Tech Badge List */}
             <div className="pt-4">
-              <p className="text-sm font-medium text-slate-500 dark:text-zinc-500 mb-3 uppercase tracking-wider">
+              <p className="text-sm font-medium text-zinc-500 mb-3 uppercase tracking-wider">
                 Tech I work with
               </p>
               <div className="flex flex-wrap gap-2">
@@ -138,7 +128,7 @@ const About = () => {
                 ].map((tech) => (
                   <span
                     key={tech}
-                    className="px-3 py-1 bg-slate-100 dark:bg-zinc-900 border border-slate-200 dark:border-white/10 rounded-md text-xs text-slate-600 dark:text-zinc-300"
+                    className="px-3 py-1 bg-zinc-900 border border-white/10 rounded-md text-xs text-zinc-300"
                   >
                     {tech}
                   </span>
@@ -152,7 +142,8 @@ const About = () => {
             className="md:col-span-6 space-y-4"
             variants={containerVariants}
             initial="hidden"
-            animate={isInView ? "visible" : "hidden"}
+            whileInView="visible"
+            viewport={{ once: true }}
           >
             {features.map((feature, index) => (
               <motion.div
