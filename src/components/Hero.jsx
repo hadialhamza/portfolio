@@ -142,7 +142,7 @@ const Hero = () => {
           initial={{ opacity: 0, x: 50 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.8 }}
-          className="relative flex justify-center md:justify-end mt-12 md:mt-0"
+          className="relative flex justify-center md:justify-end mt-15 md:mt-0"
         >
           <div className="group relative w-72 h-80 md:w-96 md:h-112 border-2 border-primary rounded-2xl">
             <div className="group absolute -top-5 -left-5 w-full h-full bg-slate-800 rounded-2xl overflow-hidden shadow-2xl shadow-primary/30 dark:shadow-primary/50 transition-transform duration-500 hover:translate-y-5 hover:translate-x-5">
