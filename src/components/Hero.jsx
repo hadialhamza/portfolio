@@ -4,7 +4,6 @@ import {
   Mail,
   Download,
   ChevronDown,
-  Code,
   FileCode,
   Figma,
   Database,
@@ -12,13 +11,17 @@ import {
 } from "lucide-react";
 // eslint-disable-next-line
 import { motion } from "framer-motion";
+import { LuCodeXml } from "react-icons/lu";
+import { SiExpress, SiMongodb } from "react-icons/si";
+import { TbBrandReact } from "react-icons/tb";
+import { FaNodeJs } from "react-icons/fa";
 // eslint-disable-next-line
 const SocialButton = ({ icon: Icon, href, label }) => (
   <a
     href={href}
     target="_blank"
     rel="noopener noreferrer"
-    className="p-3 rounded-full bg-slate-200 dark:bg-slate-800 text-slate-600 dark:text-slate-400 hover:bg-primary hover:text-white transition-all border border-slate-300 dark:border-slate-700 hover:border-primary cursor-pointer"
+    className="p-3 rounded-full bg-slate-200 dark:bg-slate-800 text-slate-600 dark:text-slate-400 hover:bg-primary hover:text-slate-900 transition-all border border-slate-300 dark:border-slate-700 hover:border-primary cursor-pointer"
     aria-label={label}
   >
     <Icon size={20} />
@@ -43,21 +46,23 @@ const Hero = () => {
           initial={{ opacity: 0, x: -50 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.8 }}
-          className="flex flex-col items-center md:items-start text-center md:text-left flex-1"
+          className="w-full flex flex-col items-center md:items-start text-center md:text-left"
         >
           <span className="px-3 py-1 text-sm font-medium rounded-full bg-primary/10 text-primary border border-primary/20 mb-6">
             MERN Stack Developer
           </span>
-          <h1 className="text-5xl md:text-7xl font-bold tracking-tight leading-tight mb-6 font-display text-slate-900 dark:text-white">
-            Hi, I'm <span className="text-primary">Hadi</span>
-            <span className="text-slate-900 dark:text-white">.</span>
+          <h1 className="text-5xl md:text-[4.25rem] font-bold tracking-tight leading-tight mb-6 text-slate-900 dark:text-white">
+            Hi, I'm <span className="text-primary">Hadi Al Hamza</span>
+            <span className="text-slate-900 dark:text-white animate-pulse">
+              .
+            </span>
           </h1>
 
           <div className="flex gap-4 mb-8">
-            <TechIcon icon={FileCode} />
-            <TechIcon icon={Database} />
-            <TechIcon icon={Figma} />
-            <TechIcon icon={Terminal} />
+            <TechIcon icon={SiMongodb} />
+            <TechIcon icon={SiExpress} />
+            <TechIcon icon={TbBrandReact} />
+            <TechIcon icon={FaNodeJs} />
           </div>
 
           <p className="text-lg text-slate-600 dark:text-slate-400 max-w-xl leading-relaxed mb-8">
@@ -101,20 +106,20 @@ const Hero = () => {
           initial={{ opacity: 0, x: 50 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.8 }}
-          className="relative flex-1 flex justify-center md:justify-end mt-12 md:mt-0"
+          className="relative flex justify-center md:justify-end mt-12 md:mt-0"
         >
-          <div className="relative w-72 h-80 md:w-96 md:h-[28rem] border-2 border-primary rounded-2xl">
-            <div className="absolute -top-12 -left-6 w-full h-full bg-slate-800 rounded-2xl overflow-hidden shadow-2xl shadow-primary/30 dark:shadow-primary/50 transition-transform duration-500 hover:-translate-y-2">
+          <div className="relative w-72 h-80 md:w-96 md:h-112 border-2 border-primary rounded-2xl">
+            <div className="absolute -top-5 -left-5 w-full h-full bg-slate-800 rounded-2xl overflow-hidden shadow-2xl shadow-primary/30 dark:shadow-primary/50 transition-transform duration-500 hover:translate-y-5 hover:translate-x-5">
               <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent z-10 opacity-80"></div>
               <img
                 src="/public/hamza.jpg"
                 alt="Hadi Al Hamza"
-                className="w-full h-full object-cover object-top"
+                className="w-full h-full object-cover "
               />
             </div>
 
-            <div className="absolute -bottom-6 -right-6 bg-white dark:bg-slate-900 p-2 text-primary border border-slate-200 dark:border-slate-800 rounded-lg shadow-lg z-20">
-              <Code size={48} />
+            <div className="absolute -bottom-6 -right-6 bg-slate-100 dark:bg-slate-800 p-1 text-primary border border-slate-200 dark:border-slate-800 rounded-lg z-20 shadow-float">
+              <LuCodeXml size={40} />
             </div>
           </div>
         </motion.div>

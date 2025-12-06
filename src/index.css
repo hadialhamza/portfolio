@@ -41,6 +41,10 @@ body.light {
   --color-primary-dark: #0e7490;
 }
 
+.shadow-float {
+  @apply shadow-[0_0_15px_2px_#0891b2];
+}
+
 /* Scrollbar Styles */
 ::-webkit-scrollbar {
   width: 10px;
