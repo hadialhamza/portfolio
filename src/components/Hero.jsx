@@ -148,7 +148,7 @@ const Hero = () => {
             <div className="group absolute -top-5 -left-5 w-full h-full bg-slate-800 rounded-2xl overflow-hidden shadow-2xl shadow-primary/30 dark:shadow-primary/50 transition-transform duration-500 hover:translate-y-5 hover:translate-x-5">
               <div className="absolute inset-0 bg-linear-to-t from-black/90 via-black/20 to-transparent z-10 opacity-80"></div>
               <img
-                src="/public/hamza.jpg"
+                src="https://i.ibb.co.com/VcMCpXcN/hamza.jpg"
                 alt="Hadi Al Hamza"
                 className="w-full h-full object-cover "
               />
