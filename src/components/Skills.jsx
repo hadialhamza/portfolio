@@ -1,140 +1,369 @@
 import {
   FaReact,
   FaNodeJs,
-  FaHtml5,
-  FaCss3Alt,
-  FaJs,
   FaGitAlt,
   FaGithub,
-  FaNpm,
+  FaGoogle,
 } from "react-icons/fa";
 import {
-  SiMongodb,
-  SiExpress,
-  SiTailwindcss,
-  SiRedux,
-  SiPostman,
   SiNextdotjs,
+  SiTailwindcss,
+  SiJavascript,
+  SiExpress,
+  SiMongodb,
+  SiFirebase,
+  SiJsonwebtokens,
+  SiPostman,
+  SiVercel,
+  SiNetlify,
+  SiFramer,
+  SiReactquery,
+  SiRadixui,
+  SiGithubcopilot,
 } from "react-icons/si";
-import { Cpu } from "lucide-react";
+import {
+  Cpu,
+  Layout,
+  Server,
+  Wrench,
+  Zap,
+  BarChart3,
+  Scroll,
+  Bot,
+  Layers,
+} from "lucide-react";
+import SectionHeading from "./SectionHeading";
+import { motion } from "framer-motion";
+import Marquee from "react-fast-marquee";
 
 const Skills = () => {
-  const skillCategories = [
+  // 1. Frontend Development (Heavy Focus)
+  const frontend = [
     {
-      title: "Frontend",
-      skills: [
-        { name: "React", icon: <FaReact />, color: "#61DAFB" },
-        { name: "JavaScript", icon: <FaJs />, color: "#F7DF1E" },
-        { name: "HTML5", icon: <FaHtml5 />, color: "#E34F26" },
-        { name: "CSS3", icon: <FaCss3Alt />, color: "#1572B6" },
-        { name: "Tailwind", icon: <SiTailwindcss />, color: "#06B6D4" },
-        { name: "Redux", icon: <SiRedux />, color: "#764ABC" },
-        {
-          name: "Next.js",
-          icon: <SiNextdotjs />,
-          color: "#000000 dark:text-white",
-        },
-      ],
+      name: "Next.js",
+      icon: SiNextdotjs,
+      color: "#000000", // Will be white in dark mode
+      desc: "React Framework",
+      proficiency: "Expert",
     },
     {
-      title: "Backend",
-      skills: [
-        { name: "Node.js", icon: <FaNodeJs />, color: "#339933" },
-        {
-          name: "Express",
-          icon: <SiExpress />,
-          color: "#000000 dark:text-white",
-        },
-        { name: "MongoDB", icon: <SiMongodb />, color: "#47A248" },
-      ],
+      name: "React.js",
+      icon: FaReact,
+      color: "#61DAFB",
+      desc: "UI Library",
+      proficiency: "Expert",
     },
     {
-      title: "Tools",
-      skills: [
-        { name: "Git", icon: <FaGitAlt />, color: "#F05032" },
-        {
-          name: "GitHub",
-          icon: <FaGithub />,
-          color: "#181717 dark:text-white",
-        },
-        { name: "Postman", icon: <SiPostman />, color: "#FF6C37" },
-        { name: "NPM", icon: <FaNpm />, color: "#CB3837" },
-      ],
+      name: "Tailwind CSS",
+      icon: SiTailwindcss,
+      color: "#06B6D4",
+      desc: "Utility-first CSS",
+      proficiency: "Expert",
+    },
+    {
+      name: "shadcn/ui",
+      icon: SiRadixui, // Representing Radix/Shadcn
+      color: "#000000",
+      desc: "Component Library",
+      proficiency: "Expert",
+    },
+    {
+      name: "Framer Motion",
+      icon: SiFramer,
+      color: "#FF0055",
+      desc: "Animations",
+      proficiency: "Advanced",
+    },
+    {
+      name: "TanStack Query",
+      icon: SiReactquery,
+      color: "#FF4154",
+      desc: "Async State",
+      proficiency: "Advanced",
+    },
+    {
+      name: "Zustand",
+      icon: Layers, // Generic icon for State
+      color: "#764ABC",
+      desc: "State Management",
+      proficiency: "Advanced",
+    },
+    {
+      name: "Recharts",
+      icon: BarChart3,
+      color: "#22B5BF",
+      desc: "Data Viz",
+      proficiency: "Intermediate",
+    },
+    {
+      name: "Lenis Scroll",
+      icon: Scroll,
+      color: "#ff9900",
+      desc: "Smooth Scrolling",
+      proficiency: "Intermediate",
     },
   ];
+
+  // 2. Backend Development (Core + Auth)
+  const backend = [
+    {
+      name: "Node.js",
+      icon: FaNodeJs,
+      color: "#339933",
+      desc: "Runtime Env",
+      proficiency: "Advanced",
+    },
+    {
+      name: "Express.js",
+      icon: SiExpress,
+      color: "#000000",
+      desc: "Web Framework",
+      proficiency: "Advanced",
+    },
+    {
+      name: "MongoDB",
+      icon: SiMongodb,
+      color: "#47A248",
+      desc: "NoSQL Database",
+      proficiency: "Intermediate",
+    },
+    {
+      name: "Firebase",
+      icon: SiFirebase,
+      color: "#FFCA28",
+      desc: "BaaS & Auth",
+      proficiency: "Advanced",
+    },
+    {
+      name: "OAuth",
+      icon: FaGoogle, // Representing generic OAuth providers
+      color: "#4285F4",
+      desc: "Authentication",
+      proficiency: "Intermediate",
+    },
+    {
+      name: "JWT",
+      icon: SiJsonwebtokens,
+      color: "#D63AFF",
+      desc: "Security",
+      proficiency: "Intermediate",
+    },
+  ];
+
+  // 3. Tools & AI (Modern Stack)
+  const tools = [
+    {
+      name: "Git & GitHub",
+      icon: FaGithub,
+      color: "#181717",
+      desc: "Version Control",
+      proficiency: "Expert",
+    },
+    {
+      name: "VS Code",
+      icon: Wrench,
+      color: "#007ACC",
+      desc: "Code Editor",
+      proficiency: "Expert",
+    },
+    {
+      name: "Postman",
+      icon: SiPostman,
+      color: "#FF6C37",
+      desc: "API Testing",
+      proficiency: "Advanced",
+    },
+    {
+      name: "Thunder Client",
+      icon: Zap,
+      color: "#AC54F2",
+      desc: "Lightweight API",
+      proficiency: "Advanced",
+    },
+    {
+      name: "Vercel",
+      icon: SiVercel,
+      color: "#000000",
+      desc: "Deployment",
+      proficiency: "Advanced",
+    },
+    {
+      name: "GitHub Copilot",
+      icon: SiGithubcopilot,
+      color: "#6E7681",
+      desc: "AI Assistant",
+      proficiency: "Daily User",
+    },
+    {
+      name: "Antigravity/Kiro",
+      icon: Bot,
+      color: "#10B981",
+      desc: "AI Tools",
+      proficiency: "Explorer",
+    },
+  ];
+
+  // Proficiency Badge Color Logic
+  const getProficiencyStyle = (level) => {
+    switch (level) {
+      case "Expert":
+        return "bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 border-emerald-500/20 shadow-[0_0_10px_rgba(16,185,129,0.1)]";
+      case "Advanced":
+        return "bg-blue-500/10 text-blue-600 dark:text-blue-400 border-blue-500/20 shadow-[0_0_10px_rgba(59,130,246,0.1)]";
+      case "Intermediate":
+      case "Daily User":
+        return "bg-amber-500/10 text-amber-600 dark:text-amber-400 border-amber-500/20";
+      default:
+        return "bg-slate-500/10 text-slate-600 dark:text-slate-400 border-slate-500/20";
+    }
+  };
+
+  const SkillCard = ({ tech }) => (
+    <div className="relative group w-[260px] shrink-0 cursor-default mx-4">
+      {/* Background Gradient Effect on Hover */}
+      <div className="absolute -inset-0.5 bg-gradient-to-r from-transparent via-transparent to-transparent group-hover:from-cyan-500 group-hover:to-purple-600 rounded-2xl opacity-0 group-hover:opacity-75 blur transition duration-500" />
+
+      <div className="relative h-full flex flex-col justify-between p-5 bg-white dark:bg-slate-900/90 border border-slate-200 dark:border-slate-800 rounded-2xl backdrop-blur-xl transition-all duration-300 group-hover:-translate-y-1">
+        <div className="flex items-start justify-between mb-4">
+          <div className="p-3 rounded-xl bg-slate-100 dark:bg-slate-800 group-hover:scale-110 transition-transform duration-300">
+            <tech.icon
+              style={{
+                color: tech.color === "#000000" ? undefined : tech.color,
+              }}
+              className={`w-7 h-7 transition-colors duration-300 ${
+                tech.color === "#000000" ? "dark:text-white text-black" : ""
+              }`}
+            />
+          </div>
+
+          <div className="absolute right-5 top-5 opacity-0 group-hover:opacity-20 transition-opacity duration-500">
+            <tech.icon
+              className="w-16 h-16 rotate-12"
+              style={{ color: tech.color }}
+            />
+          </div>
+        </div>
+
+        <div>
+          <h4 className="font-bold text-lg text-slate-800 dark:text-slate-100 mb-1">
+            {tech.name}
+          </h4>
+          <p className="text-xs text-slate-500 dark:text-slate-400 font-medium tracking-wide uppercase mb-3">
+            {tech.desc}
+          </p>
+
+          <span
+            className={`inline-block px-3 py-1 rounded-full text-[10px] font-bold tracking-wider border uppercase ${getProficiencyStyle(
+              tech.proficiency
+            )}`}
+          >
+            {tech.proficiency}
+          </span>
+        </div>
+      </div>
+    </div>
+  );
+
+  const CategoryTitle = ({ icon: Icon, title }) => (
+    <div className="flex items-center gap-3 mb-6 px-4">
+      <div className="p-2 rounded-lg bg-cyan-500/10 text-cyan-500">
+        <Icon size={20} />
+      </div>
+      <h3 className="text-xl font-bold text-slate-800 dark:text-slate-200">
+        {title}
+      </h3>
+    </div>
+  );
 
   return (
     <section
       id="skills"
-      className="relative min-h-screen flex items-center py-20 bg-white dark:bg-slate-900 overflow-hidden transition-colors duration-300"
+      className="relative py-24 bg-slate-50 dark:bg-slate-950 overflow-hidden transition-colors duration-300"
     >
-      <div className="max-w-7xl mx-auto px-6 relative z-10">
-        {/* Header */}
-        <div className="text-center mb-20 animate-fade-in-up">
-          <span className="inline-flex items-center gap-2 py-1 px-3 rounded-full bg-primary/10 border border-primary/20 text-sm font-medium text-primary mb-4">
-            <Cpu size={14} />
-            My Toolbox
-          </span>
-          <h2 className="text-4xl md:text-6xl font-bold mb-4 text-slate-900 dark:text-white tracking-tight">
-            Technical <span className="text-primary">Proficiency</span>
-          </h2>
-          <p className="text-slate-600 dark:text-zinc-400 text-lg max-w-2xl mx-auto">
-            A curated list of technologies I use to build performant and
-            scalable digital products.
-          </p>
-        </div>
+      {/* Background Grid Pattern */}
+      <div className="absolute inset-0 z-0 h-full w-full bg-slate-50 dark:bg-slate-950 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:24px_24px]"></div>
+      <div className="absolute left-0 right-0 top-0 -z-10 m-auto h-[310px] w-[310px] rounded-full bg-primary/20 opacity-20 blur-[100px]"></div>
 
-        {/* Categories Grid */}
-        <div className="grid md:grid-cols-3 gap-8">
-          {skillCategories.map((category) => (
-            <div
-              key={category.title}
-              className="bg-white dark:bg-zinc-900/50 backdrop-blur-md border border-slate-200 dark:border-white/5 rounded-3xl p-8 hover:shadow-xl dark:hover:border-white/10 transition-all duration-300"
-            >
-              <h3 className="text-xl font-semibold text-slate-900 dark:text-zinc-100 mb-8 flex items-center gap-3">
-                <span className="w-2 h-2 rounded-full bg-primary" />
-                {category.title}
-              </h3>
+      <div className="max-w-7xl mx-auto px-4 w-full relative z-10">
+        <SectionHeading
+          icon={Cpu}
+          badgeText="My Toolbox"
+          title="Technical"
+          highlight="Proficiency"
+        />
 
-              <div className="grid grid-cols-2 gap-4">
-                {category.skills.map((skill) => (
-                  <div
-                    key={skill.name}
-                    className="group flex flex-col items-center justify-center gap-3 p-4 rounded-2xl bg-slate-50 dark:bg-black/20 border border-slate-100 dark:border-white/5 transition-all duration-300 cursor-default hover:scale-105 hover:bg-black/5 dark:hover:bg-white/5 shadow-sm hover:shadow-md"
-                  >
-                    <div
-                      className="text-3xl transition-transform duration-300 group-hover:scale-110 drop-shadow-sm"
-                      style={{
-                        color: skill.color.includes("white")
-                          ? undefined
-                          : skill.color,
-                      }}
-                    >
-                      <span
-                        className={
-                          skill.color.includes("dark:text-white")
-                            ? "text-slate-900 dark:text-white"
-                            : ""
-                        }
-                        style={
-                          skill.color.includes("dark:text-white")
-                            ? {}
-                            : { color: skill.color }
-                        }
-                      >
-                        {skill.icon}
-                      </span>
-                    </div>
-                    <span className="text-sm font-medium text-slate-600 dark:text-zinc-400 group-hover:text-slate-900 dark:group-hover:text-zinc-200 transition-colors">
-                      {skill.name}
-                    </span>
-                  </div>
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          className="mt-16 space-y-16"
+        >
+          {/* Row 1 - Frontend (Marquee Left) */}
+          <div className="relative">
+            <CategoryTitle icon={Layout} title="Frontend & UI" />
+            <div className="relative fade-masks">
+              <Marquee
+                gradient={false}
+                speed={50}
+                pauseOnHover={true}
+                className="py-4"
+              >
+                {frontend.map((tech, index) => (
+                  <SkillCard key={`frontend-${index}`} tech={tech} />
                 ))}
-              </div>
+              </Marquee>
             </div>
-          ))}
-        </div>
+          </div>
+
+          {/* Row 2 - Backend (Marquee Right) */}
+          <div className="relative">
+            <CategoryTitle icon={Server} title="Backend & Security" />
+            <div className="relative fade-masks">
+              <Marquee
+                gradient={false}
+                speed={50}
+                direction="right"
+                pauseOnHover={true}
+                className="py-4"
+              >
+                {backend.map((tech, index) => (
+                  <SkillCard key={`backend-${index}`} tech={tech} />
+                ))}
+              </Marquee>
+            </div>
+          </div>
+
+          {/* Row 3 - Tools (Marquee Left) */}
+          <div className="relative">
+            <CategoryTitle icon={Wrench} title="Tools & AI Power" />
+            <div className="relative fade-masks">
+              <Marquee
+                gradient={false}
+                speed={50}
+                pauseOnHover={true}
+                className="py-4"
+              >
+                {tools.map((tech, index) => (
+                  <SkillCard key={`tools-${index}`} tech={tech} />
+                ))}
+              </Marquee>
+            </div>
+          </div>
+        </motion.div>
       </div>
+
+      {/* CSS for fading edges */}
+      <style jsx>{`
+        .fade-masks {
+          mask-image: linear-gradient(
+            to right,
+            transparent,
+            black 10%,
+            black 90%,
+            transparent
+          );
+        }
+      `}</style>
     </section>
   );
 };

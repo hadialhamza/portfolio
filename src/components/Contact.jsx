@@ -7,7 +7,13 @@ import {
   Send,
   MessageSquare,
   ArrowRight,
+  Github,
+  Linkedin,
+  Facebook,
+  Instagram,
 } from "lucide-react";
+
+import SectionHeading from "./SectionHeading";
 
 const Contact = () => {
   const ref = useRef(null);
@@ -63,37 +69,48 @@ const Contact = () => {
     },
   ];
 
+  const socialLinks = [
+    {
+      icon: Github,
+      label: "GitHub",
+      href: "https://github.com/hadialhamza",
+    },
+    {
+      icon: Linkedin,
+      label: "LinkedIn",
+      href: "https://linkedin.com/in/hadialhamza",
+    },
+    {
+      icon: Facebook,
+      label: "Facebook",
+      href: "#",
+    },
+    {
+      icon: Instagram,
+      label: "Instagram",
+      href: "#",
+    },
+  ];
+
   return (
     <section
       id="contact"
-      className="relative min-h-screen flex items-center py-24 bg-white dark:bg-slate-900 overflow-hidden transition-colors duration-300"
+      className="relative min-h-screen flex items-center py-24 bg-slate-50 dark:bg-slate-900 overflow-hidden transition-colors duration-300"
     >
-      {/* Ambient Background Glows */}
-      <div className="absolute top-1/2 left-0 w-[500px] h-[500px] bg-indigo-500/10 rounded-full blur-[120px] -translate-y-1/2 -translate-x-1/2 pointer-events-none" />
-      <div className="absolute bottom-0 right-0 w-[500px] h-[500px] bg-purple-500/10 rounded-full blur-[120px] translate-y-1/3 translate-x-1/3 pointer-events-none" />
+      {/* Background Grid Pattern */}
+      <div className="absolute inset-0 z-0 h-full w-full bg-slate-50 dark:bg-slate-950 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:24px_24px]"></div>
+      <div className="absolute left-0 right-0 top-0 -z-10 m-auto h-[310px] w-[310px] rounded-full bg-primary/20 opacity-20 blur-[100px]"></div>
 
-      <div ref={ref} className="max-w-7xl mx-auto px-6 relative z-10">
-        {/* Header */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.6 }}
-          className="text-center mb-16"
-        >
-          <span className="inline-flex items-center gap-2 py-1 px-3 rounded-full bg-primary/10 border border-primary/20 text-sm font-medium text-primary mb-4">
-            <Send size={14} />
-            Contact
-          </span>
-          <h2 className="text-4xl md:text-6xl font-bold mb-6 text-slate-900 dark:text-white tracking-tight">
-            Let's start a <span className="text-primary">Conversation.</span>
-          </h2>
-          <p className="text-slate-600 dark:text-zinc-400 text-lg max-w-xl mx-auto">
-            Ready to turn your idea into reality? I'm currently available for
-            freelance work and open to new opportunities.
-          </p>
-        </motion.div>
+      <div ref={ref} className="max-w-7xl mx-auto px-6 relative z-10 w-full">
+        <SectionHeading
+          icon={Send}
+          badgeText="Contact"
+          title="Let's start a"
+          highlight="Conversation."
+          description="Ready to turn your idea into reality? I'm currently available for freelance work and open to new opportunities."
+        />
 
-        <div className="grid md:grid-cols-2 gap-12 lg:gap-20 items-start">
+        <div className="grid md:grid-cols-2 gap-12 lg:gap-20 items-start mt-12">
           {/* Left Column: Contact Info */}
           <motion.div
             initial={{ opacity: 0, x: -30 }}
@@ -101,7 +118,7 @@ const Contact = () => {
             transition={{ duration: 0.6, delay: 0.2 }}
             className="space-y-6"
           >
-            <div className="bg-white dark:bg-zinc-900/30 backdrop-blur-md border border-slate-200 dark:border-white/5 rounded-3xl p-8 shadow-lg dark:shadow-none">
+            <div className="bg-white dark:bg-zinc-900/30 border border-slate-200 dark:border-white/5 rounded-3xl p-8 shadow-lg dark:shadow-none">
               <h3 className="text-2xl font-bold text-slate-900 dark:text-white mb-6 flex items-center gap-2">
                 <MessageSquare className="text-indigo-600 dark:text-indigo-400" />
                 Get in touch
@@ -144,6 +161,29 @@ const Contact = () => {
                   </motion.div>
                 ))}
               </div>
+
+              {/* Social Links */}
+              <div className="mt-8 pt-6 border-t border-slate-200 dark:border-white/5">
+                <p className="text-sm text-slate-500 dark:text-zinc-500 mb-4">
+                  Follow me on social media
+                </p>
+                <div className="flex gap-4">
+                  {socialLinks.map((social) => (
+                    <motion.a
+                      key={social.label}
+                      href={social.href}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="p-3 rounded-xl bg-slate-50 dark:bg-white/5 border border-slate-100 dark:border-white/5 text-slate-600 dark:text-slate-400 hover:bg-primary/10 hover:text-primary hover:border-primary/20 transition-all duration-300 shadow-sm hover:shadow-md"
+                      whileHover={{ scale: 1.1, y: -2 }}
+                      whileTap={{ scale: 0.95 }}
+                      aria-label={social.label}
+                    >
+                      <social.icon className="w-5 h-5" />
+                    </motion.a>
+                  ))}
+                </div>
+              </div>
             </div>
           </motion.div>
 
@@ -155,7 +195,7 @@ const Contact = () => {
           >
             <form
               onSubmit={handleSubmit}
-              className="bg-white dark:bg-zinc-900/50 backdrop-blur-xl border border-slate-200 dark:border-white/10 rounded-3xl p-8 md:p-10 shadow-2xl relative overflow-hidden"
+              className="bg-white dark:bg-zinc-900/50 border border-slate-200 dark:border-white/10 rounded-3xl p-8 md:p-10 shadow-2xl relative overflow-hidden"
             >
               {/* Decorative gradient inside form */}
               <div className="absolute top-0 right-0 w-64 h-64 bg-indigo-500/5 rounded-full blur-[80px] -translate-y-1/2 translate-x-1/2 pointer-events-none" />

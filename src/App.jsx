@@ -1,4 +1,5 @@
-import { useState, useEffect } from "react";
+// import Link from "./components/ui/Link";
+import { ReactLenis } from "lenis/react";
 // import Link from "./components/ui/Link";
 import Navbar from "./components/Navbar";
 import Hero from "./components/Hero";
@@ -9,28 +10,18 @@ import Contact from "./components/Contact";
 import Footer from "./components/Footer";
 
 function App() {
-  const [darkMode, setDarkMode] = useState(true);
-
-  useEffect(() => {
-    if (darkMode) {
-      document.body.classList.add("dark");
-      document.body.classList.remove("light");
-    } else {
-      document.body.classList.add("light");
-      document.body.classList.remove("dark");
-    }
-  }, [darkMode]);
-
   return (
-    <div>
-      <Navbar darkMode={darkMode} setDarkMode={setDarkMode} />
-      <Hero />
-      <About />
-      <Skills />
-      <Projects />
-      <Contact />
-      <Footer />
-    </div>
+    <ReactLenis root>
+      <div>
+        <Navbar />
+        <Hero />
+        <About />
+        <Skills />
+        <Projects />
+        <Contact />
+        <Footer />
+      </div>
+    </ReactLenis>
   );
 }
 

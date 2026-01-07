@@ -2,9 +2,9 @@
 @import "tailwindcss";
 
 @theme {
-  --color-primary: #00f2ea;
-  --color-primary-dark: #00c4bd;
-  --color-secondary: #0f172a;
+  --color-primary: #00e1ff;
+  --color-primary-dark: #00b2cc;
+  --color-secondary: #a655f7;
 }
 
 * {
@@ -23,22 +23,9 @@ body {
   font-family: "Montserrat", sans-serif;
 }
 
-body.dark {
+body {
   background-color: #0f172a;
   color: #f1f5f9;
-}
-
-.active-link {
-  color: var(--color-primary) !important;
-  font-weight: 700 !important;
-}
-
-body.light {
-  background-color: #ffffff;
-  color: #1e293b;
-  --color-primary: #0891b2;
-  /* Cyan-600 for better contrast on white */
-  --color-primary-dark: #0e7490;
 }
 
 .shadow-float {
@@ -61,4 +48,177 @@ body.light {
 
 ::-webkit-scrollbar-thumb:hover {
   background: var(--color-primary-dark);
+}
+
+@layer components {
+  .glass {
+    @apply bg-white/5 backdrop-blur-xl border border-white/10 shadow-xl;
+  }
+
+  .glass-card {
+    @apply bg-white/5 backdrop-blur-xl border border-white/10 rounded-2xl shadow-2xl;
+  }
+
+  /* Define neon colors with HSL for opacity manipulation */
+  :root {
+    --neon-cyan: 187 100% 50%;
+  }
+
+  .neon-glow-cyan {
+    box-shadow: 0 0 20px hsl(var(--neon-cyan) / 0.3),
+      0 0 40px hsl(var(--neon-cyan) / 0.2), 0 0 60px hsl(var(--neon-cyan) / 0.1);
+  }
+
+  .neon-glow-purple {
+    box-shadow: 0 0 20px rgba(166, 85, 247, 0.3),
+      0 0 40px rgba(166, 85, 247, 0.2), 0 0 60px rgba(166, 85, 247, 0.1);
+  }
+
+  .neon-text-cyan {
+    text-shadow: 0 0 10px rgba(0, 225, 255, 0.5),
+      0 0 20px rgba(0, 225, 255, 0.3), 0 0 30px rgba(0, 225, 255, 0.2);
+  }
+
+  .neon-text-purple {
+    text-shadow: 0 0 10px rgba(166, 85, 247, 0.5),
+      0 0 20px rgba(166, 85, 247, 0.3), 0 0 30px rgba(166, 85, 247, 0.2);
+  }
+
+  .gradient-text {
+    @apply bg-gradient-to-r from-[var(--color-primary)] via-[var(--color-secondary)] to-[var(--color-primary)] bg-clip-text text-transparent bg-[length:200%_auto];
+  }
+
+  .bg-neon-gradient {
+    background: linear-gradient(to right,
+        var(--color-primary),
+        var(--color-secondary));
+  }
+
+  .gradient-border {
+    position: relative;
+  }
+
+  .gradient-border::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    padding: 1px;
+    border-radius: inherit;
+    background: linear-gradient(135deg,
+        var(--color-primary),
+        var(--color-secondary));
+    -webkit-mask: linear-gradient(#fff 0 0) content-box,
+      linear-gradient(#fff 0 0);
+    mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+  }
+
+  .typing-cursor::after {
+    content: "|";
+    @apply text-[var(--color-primary)] animate-pulse;
+  }
+}
+
+@keyframes gradient-shift {
+  0% {
+    background-position: 0% 50%;
+  }
+
+  50% {
+    background-position: 100% 50%;
+  }
+
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+.animate-gradient-shift {
+  animation: gradient-shift 5s ease infinite;
+}
+
+@keyframes tilt {
+
+  0%,
+  100% {
+    transform: rotate(0deg);
+  }
+
+  25% {
+    transform: rotate(0.5deg);
+  }
+
+  75% {
+    transform: rotate(-0.5deg);
+  }
+}
+
+.animate-tilt {
+  animation: tilt 10s infinite linear;
+}
+
+@keyframes scroll-wheel {
+  0% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+
+  100% {
+    transform: translateY(12px);
+    opacity: 0;
+  }
+}
+
+.animate-scroll-wheel {
+  animation: scroll-wheel 1.5s cubic-bezier(0.15, 0.41, 0.69, 0.94) infinite;
+}
+
+@keyframes mouse-bounce {
+
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+.animate-mouse-bounce {
+  animation: mouse-bounce 2s ease-in-out infinite;
+}
+
+@keyframes marquee {
+  0% {
+    transform: translateX(0);
+  }
+
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+.animate-marquee {
+  animation: marquee 30s linear infinite;
+}
+
+@keyframes marquee-reverse {
+  0% {
+    transform: translateX(-50%);
+  }
+
+  100% {
+    transform: translateX(0);
+  }
+}
+
+.animate-marquee-reverse {
+  animation: marquee-reverse 30s linear infinite;
+}
+
+.pause-on-hover:hover .animate-marquee,
+.pause-on-hover:hover .animate-marquee-reverse {
+  animation-play-state: paused;
 }
