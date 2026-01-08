@@ -104,7 +104,7 @@ const Contact = () => {
   return (
     <section
       id="contact"
-      className="relative flex items-center py-16 md:py-24 bg-slate-50 dark:bg-slate-900 overflow-hidden transition-colors duration-300"
+      className="relative flex items-center  bg-slate-50 dark:bg-slate-900 overflow-hidden transition-colors duration-300"
     >
       {/* Background Grid Pattern */}
       <div className="absolute inset-0 z-0 h-full w-full bg-slate-50 dark:bg-slate-950 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:24px_24px]"></div>

@@ -4,7 +4,6 @@ import { Code2, Zap, Layout, User, Terminal } from "lucide-react";
 import SectionHeading from "./SectionHeading";
 
 const About = () => {
-  // Animation Variants
   const containerVariants = {
     hidden: { opacity: 0 },
     visible: {
@@ -25,7 +24,6 @@ const About = () => {
     },
   };
 
-  // Feature Cards Data
   const features = [
     {
       icon: <Code2 className="w-6 h-6" />,
@@ -59,19 +57,19 @@ const About = () => {
   return (
     <section
       id="about"
-      className="relative py-24 bg-slate-50 dark:bg-slate-950 transition-colors duration-300 overflow-hidden"
+      className="relative pt-30 bg-slate-50 dark:bg-slate-950 transition-colors duration-300 overflow-hidden"
     >
       {/* Background Decor */}
-      <div className="absolute inset-0 z-0 h-full w-full bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:24px_24px]"></div>
+      <div className="absolute inset-0 z-0 h-full w-full bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-size-[24px_24px]"></div>
       <div className="absolute right-0 top-1/4 w-[500px] h-[500px] bg-primary/10 rounded-full blur-[120px] pointer-events-none" />
       <div className="absolute left-0 bottom-1/4 w-[400px] h-[400px] bg-purple-500/10 rounded-full blur-[100px] pointer-events-none" />
 
-      <div className="max-w-7xl mx-auto px-6 w-full relative z-10">
+      <div className="max-w-7xl mx-auto px-5 w-full relative z-10">
         <SectionHeading
           icon={User}
           badgeText="About Me"
-          title="Developer behind the"
-          highlight="screen"
+          title="Developer"
+          highlight="behind the screen"
         />
 
         <div className="grid lg:grid-cols-12 gap-12 lg:gap-16 items-start mt-12">
@@ -85,11 +83,11 @@ const About = () => {
           >
             <div className="p-8 rounded-3xl bg-white/60 dark:bg-slate-900/60 backdrop-blur-xl border border-slate-200 dark:border-slate-800 shadow-xl dark:shadow-2xl relative overflow-hidden group">
               {/* Subtle Gradient Hover */}
-              <div className="absolute inset-0 bg-gradient-to-br from-cyan-500/5 to-purple-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+              <div className="absolute inset-0 bg-linear-to-br from-cyan-500/5 to-purple-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
 
               <h3 className="relative text-2xl font-bold text-slate-800 dark:text-slate-100 mb-6">
                 Hello! I'm a{" "}
-                <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-500 to-purple-500">
+                <span className="text-transparent bg-clip-text bg-linear-to-r from-cyan-500 to-purple-500">
                   Full Stack Developer
                 </span>{" "}
                 navigating the world of modern web.
@@ -170,7 +168,7 @@ const About = () => {
                   className={`group relative p-5 rounded-2xl bg-white dark:bg-slate-900/60 border border-slate-200 dark:border-slate-800 transition-all duration-300 hover:shadow-lg hover:-translate-y-1 ${feature.border} overflow-hidden`}
                 >
                   <div
-                    className={`absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-gradient-to-r ${feature.bg
+                    className={`absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-linear-to-r ${feature.bg
                       .replace("bg-", "from-")
                       .replace("/10", "/5")} to-transparent`}
                   />
@@ -196,7 +194,7 @@ const About = () => {
 
             {/* Code Snippet Card - VS Code Style */}
             <motion.div variants={itemVariants} className="relative mt-8 group">
-              <div className="absolute -inset-1 bg-gradient-to-r from-cyan-500 to-purple-600 rounded-2xl blur opacity-25 group-hover:opacity-50 transition duration-1000"></div>
+              <div className="absolute -inset-1 bg-linear-to-r from-cyan-500 to-purple-600 rounded-2xl blur opacity-25 group-hover:opacity-50 transition duration-1000"></div>
 
               <div className="relative rounded-2xl bg-[#1e1e1e] dark:bg-[#0d1117] border border-slate-800 shadow-2xl overflow-hidden font-mono text-sm">
                 {/* Window Header */}

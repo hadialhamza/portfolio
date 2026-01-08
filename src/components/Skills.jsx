@@ -1,10 +1,4 @@
-import {
-  FaReact,
-  FaNodeJs,
-  FaGitAlt,
-  FaGithub,
-  FaGoogle,
-} from "react-icons/fa";
+import { FaReact, FaNodeJs, FaGithub, FaGoogle } from "react-icons/fa";
 import {
   SiNextdotjs,
   SiTailwindcss,
@@ -37,12 +31,11 @@ import { motion } from "framer-motion";
 import Marquee from "react-fast-marquee";
 
 const Skills = () => {
-  // 1. Frontend Development (Heavy Focus)
   const frontend = [
     {
       name: "Next.js",
       icon: SiNextdotjs,
-      color: "#000000", // Will be white in dark mode
+      color: "#000000",
       desc: "React Framework",
       proficiency: "Expert",
     },
@@ -62,7 +55,7 @@ const Skills = () => {
     },
     {
       name: "shadcn/ui",
-      icon: SiRadixui, // Representing Radix/Shadcn
+      icon: SiRadixui,
       color: "#000000",
       desc: "Component Library",
       proficiency: "Expert",
@@ -83,7 +76,7 @@ const Skills = () => {
     },
     {
       name: "Zustand",
-      icon: Layers, // Generic icon for State
+      icon: Layers,
       color: "#764ABC",
       desc: "State Management",
       proficiency: "Advanced",
@@ -136,7 +129,7 @@ const Skills = () => {
     },
     {
       name: "OAuth",
-      icon: FaGoogle, // Representing generic OAuth providers
+      icon: FaGoogle,
       color: "#4285F4",
       desc: "Authentication",
       proficiency: "Intermediate",
@@ -221,7 +214,7 @@ const Skills = () => {
   const SkillCard = ({ tech }) => (
     <div className="relative group w-[260px] shrink-0 cursor-default mx-4">
       {/* Background Gradient Effect on Hover */}
-      <div className="absolute -inset-0.5 bg-gradient-to-r from-transparent via-transparent to-transparent group-hover:from-cyan-500 group-hover:to-purple-600 rounded-2xl opacity-0 group-hover:opacity-75 blur transition duration-500" />
+      <div className="absolute -inset-0.5 bg-linear-to-r from-transparent via-transparent to-transparent group-hover:from-primary group-hover:to-secondary rounded-2xl opacity-0 group-hover:opacity-75 blur transition duration-500" />
 
       <div className="relative h-full flex flex-col justify-between p-5 bg-white dark:bg-slate-900/90 border border-slate-200 dark:border-slate-800 rounded-2xl backdrop-blur-xl transition-all duration-300 group-hover:-translate-y-1">
         <div className="flex items-start justify-between mb-4">
@@ -278,7 +271,7 @@ const Skills = () => {
   return (
     <section
       id="skills"
-      className="relative py-24 bg-slate-50 dark:bg-slate-950 overflow-hidden transition-colors duration-300"
+      className="relative pt-30 bg-slate-50 dark:bg-slate-950 overflow-hidden transition-colors duration-300"
     >
       {/* Background Grid Pattern */}
       <div className="absolute inset-0 z-0 h-full w-full bg-slate-50 dark:bg-slate-950 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:24px_24px]"></div>

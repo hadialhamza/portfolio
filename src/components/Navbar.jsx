@@ -1,17 +1,6 @@
 import { useState, useEffect } from "react";
-import { motion, AnimatePresence } from "framer-motion";
-import {
-  FiMenu,
-  FiX,
-  FiHome,
-  FiUser,
-  FiCode,
-  FiLayers,
-  FiMail,
-  FiGithub,
-  FiLinkedin,
-  FiTwitter,
-} from "react-icons/fi";
+import { motion } from "framer-motion";
+import { FiHome, FiUser, FiCode, FiLayers, FiMail } from "react-icons/fi";
 import { useLenis } from "lenis/react";
 import NeonButton from "./NeonButton";
 
@@ -25,7 +14,6 @@ const navItems = [
 
 const Navbar = () => {
   const [scrolled, setScrolled] = useState(false);
-  const [menuOpen, setMenuOpen] = useState(false);
   const [activeSection, setActiveSection] = useState("home");
 
   const lenis = useLenis();
@@ -66,7 +54,6 @@ const Navbar = () => {
   }, []);
 
   const handleNavClick = (targetId) => {
-    setMenuOpen(false);
     if (lenis) {
       lenis.scrollTo(`#${targetId}`, {
         offset: -50,
@@ -86,18 +73,18 @@ const Navbar = () => {
       <motion.nav
         className={`fixed z-50 left-1/2 -translate-x-1/2 transition-all duration-500 ease-in-out ${
           scrolled
-            ? "top-4 w-[90%] md:w-170 rounded-full bg-slate-900/80 backdrop-blur-xs border border-white/10 shadow-lg py-2.5"
+            ? "top-4 w-[90%] md:w-185 rounded-full bg-slate-900/80 backdrop-blur-xs border border-white/10 shadow-lg py-2.5"
             : "top-0 w-full py-5 rounded-none bg-transparent border border-transparent"
         }`}
         initial={{ y: -100 }}
         animate={{ y: 0 }}
         transition={{ duration: 0.5 }}
       >
-        <div className="flex justify-between items-center w-full max-w-7xl mx-auto px-5">
+        <div className="flex justify-between gap-4 items-center w-full max-w-7xl mx-auto px-5">
           {/* Logo Animation */}
           <div
             onClick={() => handleNavClick("home")}
-            className="cursor-pointer relative h-8 w-28 overflow-hidden"
+            className="cursor-pointer relative h-8 w-34 overflow-hidden"
           >
             <motion.div
               className="absolute inset-0 flex items-center"
@@ -106,14 +93,14 @@ const Navbar = () => {
               <img
                 src="/hamza-logo.png"
                 alt="Hadi Al Hamza"
-                className={`absolute left-0 h-7 w-auto object-contain transition-opacity duration-500 ${
+                className={`absolute left-0 h-8 w-auto object-contain transition-opacity duration-500 ${
                   scrolled ? "opacity-0" : "opacity-100"
                 }`}
               />
               <img
                 src="/logo.png"
                 alt="Hadi Al Hamza"
-                className={`absolute left-0 h-7 w-auto object-contain transition-opacity duration-500 ${
+                className={`absolute left-0 h-8 w-auto object-contain transition-opacity duration-500 ${
                   scrolled ? "opacity-100" : "opacity-0"
                 }`}
               />
@@ -121,19 +108,42 @@ const Navbar = () => {
           </div>
 
           {/* Desktop Menu */}
-          <div className="hidden md:flex gap-6 items-center">
+          <div className="hidden md:flex gap-4 items-center">
             {navItems.map((item, index) => {
               const isActive = activeSection === item.name.toLowerCase();
               return (
-                <button
+                <motion.button
                   key={item.name}
                   onClick={() => handleNavClick(item.name.toLowerCase())}
-                  className={`text-sm uppercase tracking-wide transition-all duration-300 relative group cursor-pointer ${
+                  initial="idle"
+                  whileHover="hover"
+                  animate={isActive ? "hover" : "idle"}
+                  className={`flex items-center gap-1.5 text-sm uppercase tracking-wide transition-all duration-300 relative group cursor-pointer ${
                     isActive
                       ? "text-primary font-semibold"
-                      : "text-slate-100 hover:text-primary"
+                      : "text-slate-200 hover:text-primary"
                   }`}
                 >
+                  {/* Icon - Reveal on Hover/Active */}
+                  <motion.span
+                    variants={{
+                      idle: {
+                        width: 0,
+                        opacity: 0,
+                        transition: { duration: 0.3 },
+                      },
+                      hover: {
+                        width: "auto",
+                        opacity: 1,
+                        transition: { duration: 0.3 },
+                      },
+                    }}
+                    className="overflow-hidden flex items-center"
+                  >
+                    <item.icon size={16} className="mb-0.5" />
+                  </motion.span>
+
+                  {/* Text */}
                   <motion.span
                     initial={{ opacity: 0, y: -20 }}
                     animate={{ opacity: 1, y: 0 }}
@@ -141,12 +151,14 @@ const Navbar = () => {
                   >
                     {item.name}
                   </motion.span>
+
+                  {/* Line Indicator */}
                   <span
                     className={`absolute -bottom-1 left-0 h-0.5 bg-primary transition-all duration-300 ${
                       isActive ? "w-full" : "w-0 group-hover:w-full"
                     }`}
                   ></span>
-                </button>
+                </motion.button>
               );
             })}
 
@@ -158,111 +170,34 @@ const Navbar = () => {
             </NeonButton>
           </div>
 
-          {/* Mobile Menu Button */}
-          <div className="md:hidden flex items-center">
-            <button
-              onClick={() => setMenuOpen(!menuOpen)}
-              className="text-slate-200 hover:text-primary transition-colors cursor-pointer"
-              aria-label="Toggle Menu"
-            >
-              {menuOpen ? <FiX size={28} /> : <FiMenu size={28} />}
-            </button>
+          {/* Mobile Menu - Icons Only */}
+          <div className="md:hidden flex items-center gap-4">
+            {navItems.map((item) => {
+              const isActive = activeSection === item.name.toLowerCase();
+              return (
+                <button
+                  key={item.name}
+                  onClick={() => handleNavClick(item.name.toLowerCase())}
+                  className={`transition-all duration-300 relative group cursor-pointer ${
+                    isActive
+                      ? "text-primary scale-110"
+                      : "text-slate-200 hover:text-primary hover:scale-110"
+                  }`}
+                  aria-label={item.name}
+                >
+                  <item.icon size={20} />
+                  {isActive && (
+                    <motion.span
+                      layoutId="mobile-active"
+                      className="absolute -bottom-2 left-1/2 -translate-x-1/2 w-1 h-1 bg-primary rounded-full block"
+                    />
+                  )}
+                </button>
+              );
+            })}
           </div>
         </div>
       </motion.nav>
-
-      {/* Mobile Menu Backdrop */}
-      <AnimatePresence>
-        {menuOpen && (
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            onClick={() => setMenuOpen(false)}
-            className="fixed inset-0 bg-black/60 z-60 md:hidden"
-          />
-        )}
-      </AnimatePresence>
-
-      {/* Mobile Menu Sidebar */}
-      <motion.div
-        initial={{ x: "100%" }}
-        animate={{ x: menuOpen ? "0%" : "100%" }}
-        exit={{ x: "100%" }}
-        transition={{ type: "spring", damping: 25, stiffness: 200 }}
-        className="fixed top-0 right-0 h-screen w-[280px] bg-slate-950 border-l border-slate-800 shadow-2xl z-70 md:hidden flex flex-col justify-between"
-      >
-        <div className="p-6 flex justify-between items-center border-b border-slate-800/50">
-          <span className="text-xl font-bold text-slate-100 tracking-tighter">
-            Hadi<span className="text-primary">.</span>dev
-          </span>
-          <button
-            onClick={() => setMenuOpen(false)}
-            className="p-2 rounded-full hover:bg-slate-800 text-slate-400 hover:text-white transition-colors"
-          >
-            <FiX size={24} />
-          </button>
-        </div>
-
-        <div className="flex flex-col gap-2 p-6 overflow-y-auto">
-          {navItems.map((item) => {
-            const isActive = activeSection === item.name.toLowerCase();
-            return (
-              <button
-                key={item.name}
-                onClick={() => handleNavClick(item.name.toLowerCase())}
-                className={`flex items-center gap-4 p-4 rounded-xl text-lg font-medium transition-all cursor-pointer group w-full text-left ${
-                  isActive
-                    ? "bg-primary/10 text-primary"
-                    : "text-slate-300 hover:bg-slate-800/50 hover:text-primary"
-                }`}
-              >
-                <item.icon
-                  className={`transition-colors ${
-                    isActive
-                      ? "text-primary"
-                      : "text-slate-400 group-hover:text-primary"
-                  }`}
-                  size={20}
-                />
-                {item.name}
-              </button>
-            );
-          })}
-        </div>
-
-        <div className="p-6 border-t border-slate-800/50 bg-slate-900/30">
-          <p className="text-xs text-slate-500 mb-4 font-medium uppercase tracking-wider text-center">
-            Connect with me
-          </p>
-          <div className="flex justify-center gap-6">
-            <a
-              href="https://github.com/hadialhamza"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-slate-400 hover:text-white hover:bg-slate-800 p-2 rounded-full transition-all duration-200"
-            >
-              <FiGithub size={20} />
-            </a>
-            <a
-              href="https://linkedin.com/in/hadialhamza"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-slate-400 hover:text-blue-500 hover:bg-slate-800 p-2 rounded-full transition-all duration-200"
-            >
-              <FiLinkedin size={20} />
-            </a>
-            <a
-              href="https://twitter.com/hadialhamza"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-slate-400 hover:text-sky-400 hover:bg-slate-800 p-2 rounded-full transition-all duration-200"
-            >
-              <FiTwitter size={20} />
-            </a>
-          </div>
-        </div>
-      </motion.div>
     </>
   );
 };
