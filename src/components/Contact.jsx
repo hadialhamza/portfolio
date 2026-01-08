@@ -14,6 +14,7 @@ import {
 } from "lucide-react";
 
 import SectionHeading from "./SectionHeading";
+import SocialButton from "./SocialButton";
 
 const Contact = () => {
   const ref = useRef(null);
@@ -74,28 +75,36 @@ const Contact = () => {
       icon: Github,
       label: "GitHub",
       href: "https://github.com/hadialhamza",
+      hoverColor: "hover:bg-black hover:text-white hover:border-black",
+      shadowColor: "shadow-gray-500/20",
     },
     {
       icon: Linkedin,
       label: "LinkedIn",
       href: "https://linkedin.com/in/hadialhamza",
+      hoverColor: "hover:bg-[#0077b5] hover:text-white hover:border-[#0077b5]",
+      shadowColor: "shadow-[#0077b5]/20",
     },
     {
       icon: Facebook,
       label: "Facebook",
       href: "#",
+      hoverColor: "hover:bg-[#1877F2] hover:text-white hover:border-[#1877F2]",
+      shadowColor: "shadow-[#1877F2]/20",
     },
     {
       icon: Instagram,
       label: "Instagram",
       href: "#",
+      hoverColor: "hover:bg-[#E4405F] hover:text-white hover:border-[#E4405F]",
+      shadowColor: "shadow-[#E4405F]/20",
     },
   ];
 
   return (
     <section
       id="contact"
-      className="relative min-h-screen flex items-center py-24 bg-slate-50 dark:bg-slate-900 overflow-hidden transition-colors duration-300"
+      className="relative flex items-center py-16 md:py-24 bg-slate-50 dark:bg-slate-900 overflow-hidden transition-colors duration-300"
     >
       {/* Background Grid Pattern */}
       <div className="absolute inset-0 z-0 h-full w-full bg-slate-50 dark:bg-slate-950 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:24px_24px]"></div>
@@ -110,7 +119,7 @@ const Contact = () => {
           description="Ready to turn your idea into reality? I'm currently available for freelance work and open to new opportunities."
         />
 
-        <div className="grid md:grid-cols-2 gap-12 lg:gap-20 items-start mt-12">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-12 lg:gap-20 items-start mt-8 md:mt-12">
           {/* Left Column: Contact Info */}
           <motion.div
             initial={{ opacity: 0, x: -30 }}
@@ -118,7 +127,7 @@ const Contact = () => {
             transition={{ duration: 0.6, delay: 0.2 }}
             className="space-y-6"
           >
-            <div className="bg-white dark:bg-zinc-900/30 border border-slate-200 dark:border-white/5 rounded-3xl p-8 shadow-lg dark:shadow-none">
+            <div className="bg-white dark:bg-zinc-900/30 border border-slate-200 dark:border-white/5 rounded-3xl p-6 md:p-8 shadow-lg dark:shadow-none">
               <h3 className="text-2xl font-bold text-slate-900 dark:text-white mb-6 flex items-center gap-2">
                 <MessageSquare className="text-indigo-600 dark:text-indigo-400" />
                 Get in touch
@@ -169,18 +178,14 @@ const Contact = () => {
                 </p>
                 <div className="flex gap-4">
                   {socialLinks.map((social) => (
-                    <motion.a
+                    <SocialButton
                       key={social.label}
+                      icon={social.icon}
                       href={social.href}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="p-3 rounded-xl bg-slate-50 dark:bg-white/5 border border-slate-100 dark:border-white/5 text-slate-600 dark:text-slate-400 hover:bg-primary/10 hover:text-primary hover:border-primary/20 transition-all duration-300 shadow-sm hover:shadow-md"
-                      whileHover={{ scale: 1.1, y: -2 }}
-                      whileTap={{ scale: 0.95 }}
-                      aria-label={social.label}
-                    >
-                      <social.icon className="w-5 h-5" />
-                    </motion.a>
+                      label={social.label}
+                      hoverColor={social.hoverColor}
+                      shadowColor={social.shadowColor}
+                    />
                   ))}
                 </div>
               </div>
@@ -195,7 +200,7 @@ const Contact = () => {
           >
             <form
               onSubmit={handleSubmit}
-              className="bg-white dark:bg-zinc-900/50 border border-slate-200 dark:border-white/10 rounded-3xl p-8 md:p-10 shadow-2xl relative overflow-hidden"
+              className="bg-white dark:bg-zinc-900/50 border border-slate-200 dark:border-white/10 rounded-3xl p-6 md:p-10 shadow-2xl relative overflow-hidden"
             >
               {/* Decorative gradient inside form */}
               <div className="absolute top-0 right-0 w-64 h-64 bg-indigo-500/5 rounded-full blur-[80px] -translate-y-1/2 translate-x-1/2 pointer-events-none" />

@@ -1,35 +1,24 @@
 import { Github, Linkedin, Mail } from "lucide-react";
-// eslint-disable-next-line
 import { motion } from "framer-motion";
 import { LuCodeXml } from "react-icons/lu";
 import { SiMongodb, SiTailwindcss, SiNextdotjs } from "react-icons/si";
 import { TbBrandReact } from "react-icons/tb";
 import { FaNodeJs, FaGithub, FaDownload } from "react-icons/fa";
 import { Typewriter } from "react-simple-typewriter";
-
-const SocialButton = ({ icon: Icon, href, label, hoverColor, shadowColor }) => (
-  <a
-    href={href}
-    target="_blank"
-    rel="noopener noreferrer"
-    className={`p-3 rounded-full text-slate-500 dark:text-slate-300 transition-all border border-slate-200 dark:border-slate-700 cursor-pointer bg-white/50 dark:bg-slate-800/50 backdrop-blur-sm ${hoverColor} ${shadowColor} hover:shadow-lg hover:-translate-y-1`}
-    aria-label={label}
-  >
-    <Icon size={22} />
-  </a>
-);
+import NeonButton from "./NeonButton";
+import SocialButton from "./SocialButton";
 
 const TechIcon = ({ icon: Icon, color, name, glowClass }) => (
   <div className="group relative flex flex-col items-center">
     <div
-      className={`absolute -inset-2 rounded-xl blur-md opacity-0 group-hover:opacity-75 transition duration-500 group-hover:duration-200 ${glowClass}`}
+      className={`absolute inset-0 rounded-xl blur opacity-60 group-hover:opacity-100 transition duration-200 ${glowClass}`}
     ></div>
     <div
-      className={`relative z-10 p-3 bg-white dark:bg-slate-800 rounded-xl border border-slate-200 dark:border-slate-700 ${color} shadow-md hover:shadow-xl hover:-translate-y-1 transition-all duration-300 cursor-default`}
+      className={`relative z-10 p-3 bg-white dark:bg-slate-800 rounded-xl border border-slate-200 dark:border-slate-700 ${color} shadow-md hover:shadow-xl hover:-translate-y-1 transition-all duration-200 cursor-default`}
     >
-      <Icon size={28} />
+      <Icon size={25} />
     </div>
-    <span className="absolute -top-8 opacity-0 group-hover:opacity-100 transition-opacity text-xs font-medium text-slate-600 dark:text-slate-300 bg-white dark:bg-slate-800 px-2 py-1 rounded border border-slate-200 dark:border-slate-700 shadow-sm whitespace-nowrap">
+    <span className="absolute -top-10 opacity-0 group-hover:opacity-100 transition-opacity duration-300 text-xs font-medium text-slate-600 dark:text-slate-300 bg-white dark:bg-slate-800 px-2 py-1 rounded border border-slate-200 dark:border-slate-700 shadow-sm whitespace-nowrap">
       {name}
     </span>
   </div>
@@ -39,17 +28,17 @@ const Hero = () => {
   return (
     <section
       id="home"
-      className="relative min-h-screen flex items-center justify-center pt-20 overflow-hidden bg-white dark:bg-slate-950 transition-colors duration-300"
+      className="relative min-h-[90vh] flex items-center justify-center  overflow-hidden transition-colors duration-300 pt-25 md:pt-20"
     >
-      <div className="absolute inset-0 z-0 h-full w-full bg-white dark:bg-slate-950 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:24px_24px]"></div>
-      <div className="absolute left-0 right-0 top-0 -z-10 m-auto h-[310px] w-[310px] rounded-full bg-primary/20 opacity-20 blur-[100px]"></div>
+      <div className="absolute inset-0 z-0 h-full w-full bg-slate-950 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-size-[24px_24px]" />
+      <div className="absolute left-0 right-0 top-0 -z-10 m-auto h-[310px] w-[310px] rounded-full bg-primary/20 opacity-20 blur-[100px]" />
 
-      <div className="relative z-10 max-w-7xl mx-auto px-6 w-full flex flex-col-reverse md:flex-row items-center justify-between gap-12 md:gap-16">
+      <div className="relative z-10 max-w-7xl mx-auto px-5 w-full flex flex-col-reverse md:flex-row items-center gap-12 md:gap-16">
         <motion.div
           initial={{ opacity: 0, x: -30 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.8, ease: "easeOut" }}
-          className="w-full md:w-3/5 flex flex-col items-center md:items-start text-center md:text-left"
+          className="w-full md:w-3/4 flex flex-col items-center md:items-start text-center md:text-left"
         >
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -68,26 +57,26 @@ const Hero = () => {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.1 }}
-            className="text-5xl md:text-7xl font-bold mb-6 text-slate-900 dark:text-white"
+            className="text-4xl md:text-[2.6rem] lg:text-5xl font-bold mb-4"
           >
             Hi, I'm{" "}
-            <span className="gradient-text animate-gradient-shift bg-[length:200%_auto]">
+            <span className="gradient-text animate-gradient-shift bg-size-[200%_auto]">
               Hadi Al Hamza
             </span>
           </motion.h1>
 
-          <div className="h-10 md:h-12 mb-8 text-xl md:text-2xl font-medium text-slate-500 dark:text-slate-400">
-            I build{" "}
-            <span className="text-slate-800 dark:text-slate-200 font-semibold">
+          <div className="h-10 md:h-12 mb-3 text-xl md:text-2xl font-medium text-slate-400">
+            &lt; I build{" "}
+            <span className="text-slate-200 font-semibold">
               <Typewriter
                 words={[
-                  "Next.js Applications",
                   "MERN Stack Projects",
+                  "Next.js Applications",
                   "Modern User Interfaces",
                 ]}
                 loop={0}
                 cursor
-                cursorStyle="|"
+                cursorStyle="/>"
                 typeSpeed={80}
                 deleteSpeed={50}
                 delaySpeed={2000}
@@ -95,7 +84,7 @@ const Hero = () => {
             </span>
           </div>
 
-          <p className="text-base md:text-lg text-slate-600 dark:text-slate-400 max-w-xl leading-relaxed mb-8">
+          <p className="text-base md:text-lg text-slate-600 dark:text-slate-400 max-w-2xl leading-relaxed mb-8">
             An enthusiastic developer focusing on the{" "}
             <span className="font-semibold text-slate-900 dark:text-slate-200">
               Next.js
@@ -144,20 +133,13 @@ const Hero = () => {
           </div>
 
           <div className="flex flex-col sm:flex-row items-center gap-5 w-full sm:w-auto">
-            <a
+            <NeonButton
               href="/hamza-resume.pdf"
               download="Hadi_Al_Hamza_Resume.pdf"
-              className="group relative px-8 py-3.5 rounded-full bg-gradient-to-r from-primary to-[var(--color-secondary)] text-slate-900 font-bold shadow-md shadow-primary/30 hover:shadow-lg hover:shadow-primary/40 hover:-translate-y-0.5 transition-all duration-300 overflow-hidden"
+              icon={FaDownload}
             >
-              <span className="relative z-10 flex items-center gap-2">
-                Download Resume
-                <FaDownload
-                  size={18}
-                  className="transform group-hover:scale-110 transition-transform duration-300"
-                />
-              </span>
-              <div className="absolute inset-0 -translate-x-full group-hover:translate-x-0 bg-white/30 transition-transform duration-300 skew-x-12"></div>
-            </a>
+              Download Resume
+            </NeonButton>
 
             <div className="flex gap-4">
               <SocialButton
@@ -191,22 +173,22 @@ const Hero = () => {
           transition={{ duration: 0.8, delay: 0.2 }}
           className="w-full md:w-2/5 flex justify-center md:justify-end relative"
         >
-          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[350px] h-[400px] bg-gradient-to-tr from-primary/30 to-purple-500/30 rounded-[30%_70%_70%_30%/30%_30%_70%_70%] blur-3xl animate-blob"></div>
+          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[350px] h-[400px] bg-linear-to-tr from-primary/30 to-secondary/30 rounded-[30%_70%_70%_30%/30%_30%_70%_70%] blur-3xl animate-blob"></div>
 
-          <div className="relative w-80 h-96 md:w-[24rem] md:h-[28rem] rounded-2xl p-2 bg-white/50 dark:bg-slate-800/50 backdrop-blur-md border border-slate-200 dark:border-slate-700 shadow-2xl relative group">
+          <div className="relative w-80 h-96 md:w-[24rem] md:h-112 rounded-2xl p-2 bg-white/50 dark:bg-slate-800/50 backdrop-blur-md border border-slate-200 dark:border-slate-700 shadow-2xl group">
             {/* 1. Rotating Border GLOW (Blurry) */}
             <div className="absolute -inset-2 rounded-2xl overflow-hidden blur-xl opacity-60 group-hover:opacity-100 transition duration-500">
-              <div className="absolute inset-[-100%] bg-[conic-gradient(from_0deg,transparent_0_340deg,cyan_360deg)] animate-[spin_4s_linear_infinite]">
+              <div className="absolute -inset-full bg-[conic-gradient(from_0deg,transparent_0_340deg,cyan_360deg)] animate-[spin_4s_linear_infinite]">
                 {/* Note: Using a conic gradient with hard stops to create a 'comet' effect or full rainbow */}
-                <div className="w-full h-full bg-[conic-gradient(from_90deg_at_50%_50%,#06b6d4_0%,#a855f7_50%,#ec4899_100%,#06b6d4_100%)]"></div>
+                <div className="w-full h-full bg-[conic-gradient(from_90deg_at_50%_50%,#06b6d4_0%,#a855f7_50%,#a855f7_100%,#06b6d4_100%)]"></div>
               </div>
             </div>
 
             {/* 2. Rotating Border LINE (Sharp) */}
-            <div className="absolute -inset-[2px] rounded-2xl overflow-hidden z-0">
-              <div className="absolute inset-[-100%] animate-[spin_4s_linear_infinite]">
+            <div className="absolute -inset-0.5 rounded-2xl overflow-hidden z-0">
+              <div className="absolute -inset-full animate-[spin_4s_linear_infinite]">
                 {/* This creates the rotating gradient */}
-                <div className="w-full h-full bg-[conic-gradient(from_90deg_at_50%_50%,#06b6d4_0%,#a855f7_50%,#ec4899_100%,#06b6d4_100%)]"></div>
+                <div className="w-full h-full bg-[conic-gradient(from_90deg_at_50%_50%,#06b6d4_0%,#a855f7_50%,#a855f7_100%,#06b6d4_100%)]"></div>
               </div>
             </div>
 
@@ -230,15 +212,15 @@ const Hero = () => {
         </motion.div>
       </div>
 
-      <div className="absolute bottom-10 left-0 right-0 mx-auto w-full max-w-7xl px-6 flex justify-end z-10 pointer-events-none">
+      <div className="absolute bottom-0 left-0 right-0 mx-auto w-full max-w-7xl px-6 flex justify-end z-10 pointer-events-none">
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 1.5, duration: 1 }}
           className="flex flex-col items-center gap-2 pointer-events-auto"
         >
-          <div className="w-[30px] h-[50px] rounded-3xl border-2 border-slate-400 dark:border-slate-500 flex justify-center p-2 box-border animate-mouse-bounce">
-            <div className="w-1 h-2 bg-slate-400 dark:bg-slate-500 rounded-full animate-scroll-wheel"></div>
+          <div className="w-[30px] h-[50px] rounded-3xl border-2 border-white/90 flex justify-center p-2 box-border animate-mouse-bounce">
+            <div className="w-1 h-2 bg-white rounded-full animate-scroll-wheel"></div>
           </div>
         </motion.div>
       </div>
