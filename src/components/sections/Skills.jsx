@@ -26,9 +26,8 @@ import {
   Bot,
   Layers,
 } from "lucide-react";
-import SectionHeading from "./SectionHeading";
 import { motion } from "framer-motion";
-import Marquee from "react-fast-marquee";
+import SectionHeading from "../shared/SectionHeading";
 
 const Skills = () => {
   const frontend = [
@@ -200,31 +199,37 @@ const Skills = () => {
   const getProficiencyStyle = (level) => {
     switch (level) {
       case "Expert":
-        return "bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 border-emerald-500/20 shadow-[0_0_10px_rgba(16,185,129,0.1)]";
+        return "bg-emerald-500/10 text-emerald-400 border-emerald-500/20 shadow-[0_0_10px_rgba(16,185,129,0.1)]";
       case "Advanced":
-        return "bg-blue-500/10 text-blue-600 dark:text-blue-400 border-blue-500/20 shadow-[0_0_10px_rgba(59,130,246,0.1)]";
+        return "bg-blue-500/10 text-blue-400 border-blue-500/20 shadow-[0_0_10px_rgba(59,130,246,0.1)]";
       case "Intermediate":
       case "Daily User":
-        return "bg-amber-500/10 text-amber-600 dark:text-amber-400 border-amber-500/20";
+        return "bg-amber-500/10 text-amber-400 border-amber-500/20";
       default:
-        return "bg-slate-500/10 text-slate-600 dark:text-slate-400 border-slate-500/20";
+        return "bg-slate-500/10 text-slate-400 border-slate-500/20";
     }
   };
 
-  const SkillCard = ({ tech }) => (
-    <div className="relative group w-[260px] shrink-0 cursor-default mx-4">
+  const SkillCard = ({ tech, index }) => (
+    <motion.div
+      initial={{ opacity: 0, y: 20 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      transition={{ delay: index * 0.05, duration: 0.5 }}
+      viewport={{ once: true }}
+      className="relative group w-full cursor-default"
+    >
       {/* Background Gradient Effect on Hover */}
       <div className="absolute -inset-0.5 bg-linear-to-r from-transparent via-transparent to-transparent group-hover:from-primary group-hover:to-secondary rounded-2xl opacity-0 group-hover:opacity-75 blur transition duration-500" />
 
-      <div className="relative h-full flex flex-col justify-between p-5 bg-white dark:bg-slate-900/90 border border-slate-200 dark:border-slate-800 rounded-2xl backdrop-blur-xl transition-all duration-300 group-hover:-translate-y-1">
+      <div className="relative h-full flex flex-col justify-between p-5 bg-slate-900/90 border border-slate-800 rounded-2xl backdrop-blur-sm transition-all duration-300 group-hover:-translate-y-1">
         <div className="flex items-start justify-between mb-4">
-          <div className="p-3 rounded-xl bg-slate-100 dark:bg-slate-800 group-hover:scale-110 transition-transform duration-300">
+          <div className="p-3 rounded-xl bg-slate-800 group-hover:scale-110 transition-transform duration-300">
             <tech.icon
               style={{
                 color: tech.color === "#000000" ? undefined : tech.color,
               }}
               className={`w-7 h-7 transition-colors duration-300 ${
-                tech.color === "#000000" ? "dark:text-white text-black" : ""
+                tech.color === "#000000" ? "text-white" : ""
               }`}
             />
           </div>
@@ -238,10 +243,8 @@ const Skills = () => {
         </div>
 
         <div>
-          <h4 className="font-bold text-lg text-slate-800 dark:text-slate-100 mb-1">
-            {tech.name}
-          </h4>
-          <p className="text-xs text-slate-500 dark:text-slate-400 font-medium tracking-wide uppercase mb-3">
+          <h4 className="font-bold text-lg text-slate-100 mb-1">{tech.name}</h4>
+          <p className="text-xs text-slate-400 font-medium tracking-wide uppercase mb-3">
             {tech.desc}
           </p>
 
@@ -254,7 +257,7 @@ const Skills = () => {
           </span>
         </div>
       </div>
-    </div>
+    </motion.div>
   );
 
   const CategoryTitle = ({ icon: Icon, title }) => (
@@ -262,20 +265,16 @@ const Skills = () => {
       <div className="p-2 rounded-lg bg-cyan-500/10 text-cyan-500">
         <Icon size={20} />
       </div>
-      <h3 className="text-xl font-bold text-slate-800 dark:text-slate-200">
-        {title}
-      </h3>
+      <h3 className="text-xl font-bold text-slate-200">{title}</h3>
     </div>
   );
 
   return (
     <section
       id="skills"
-      className="relative pt-30 bg-slate-50 dark:bg-slate-950 overflow-hidden transition-colors duration-300"
+      className="relative overflow-hidden transition-colors duration-300 section-contain"
     >
       {/* Background Grid Pattern */}
-      <div className="absolute inset-0 z-0 h-full w-full bg-slate-50 dark:bg-slate-950 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:24px_24px]"></div>
-      <div className="absolute left-0 right-0 top-0 -z-10 m-auto h-[310px] w-[310px] rounded-full bg-primary/20 opacity-20 blur-[100px]"></div>
 
       <div className="max-w-7xl mx-auto px-4 w-full relative z-10">
         <SectionHeading
@@ -285,78 +284,42 @@ const Skills = () => {
           highlight="Proficiency"
         />
 
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          className="mt-16 space-y-16"
-        >
-          {/* Row 1 - Frontend (Marquee Left) */}
+        <div className="mt-16 space-y-16">
+          {/* Row 1 - Frontend */}
           <div className="relative">
             <CategoryTitle icon={Layout} title="Frontend & UI" />
-            <div className="relative fade-masks">
-              <Marquee
-                gradient={false}
-                speed={50}
-                pauseOnHover={true}
-                className="py-4"
-              >
-                {frontend.map((tech, index) => (
-                  <SkillCard key={`frontend-${index}`} tech={tech} />
-                ))}
-              </Marquee>
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 px-4">
+              {frontend.map((tech, index) => (
+                <SkillCard
+                  key={`frontend-${index}`}
+                  tech={tech}
+                  index={index}
+                />
+              ))}
             </div>
           </div>
 
-          {/* Row 2 - Backend (Marquee Right) */}
+          {/* Row 2 - Backend */}
           <div className="relative">
             <CategoryTitle icon={Server} title="Backend & Security" />
-            <div className="relative fade-masks">
-              <Marquee
-                gradient={false}
-                speed={50}
-                direction="right"
-                pauseOnHover={true}
-                className="py-4"
-              >
-                {backend.map((tech, index) => (
-                  <SkillCard key={`backend-${index}`} tech={tech} />
-                ))}
-              </Marquee>
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 px-4">
+              {backend.map((tech, index) => (
+                <SkillCard key={`backend-${index}`} tech={tech} index={index} />
+              ))}
             </div>
           </div>
 
-          {/* Row 3 - Tools (Marquee Left) */}
+          {/* Row 3 - Tools */}
           <div className="relative">
             <CategoryTitle icon={Wrench} title="Tools & AI Power" />
-            <div className="relative fade-masks">
-              <Marquee
-                gradient={false}
-                speed={50}
-                pauseOnHover={true}
-                className="py-4"
-              >
-                {tools.map((tech, index) => (
-                  <SkillCard key={`tools-${index}`} tech={tech} />
-                ))}
-              </Marquee>
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 px-4">
+              {tools.map((tech, index) => (
+                <SkillCard key={`tools-${index}`} tech={tech} index={index} />
+              ))}
             </div>
           </div>
-        </motion.div>
+        </div>
       </div>
-
-      {/* CSS for fading edges */}
-      <style jsx>{`
-        .fade-masks {
-          mask-image: linear-gradient(
-            to right,
-            transparent,
-            black 10%,
-            black 90%,
-            transparent
-          );
-        }
-      `}</style>
     </section>
   );
 };

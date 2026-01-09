@@ -1,7 +1,7 @@
 import React from "react";
 import { motion } from "framer-motion";
 import { Code2, Zap, Layout, User, Terminal } from "lucide-react";
-import SectionHeading from "./SectionHeading";
+import SectionHeading from "../shared/SectionHeading";
 
 const About = () => {
   const containerVariants = {
@@ -57,12 +57,9 @@ const About = () => {
   return (
     <section
       id="about"
-      className="relative pt-30 bg-slate-50 dark:bg-slate-950 transition-colors duration-300 overflow-hidden"
+      className="relative transition-colors duration-300 overflow-hidden section-contain"
     >
       {/* Background Decor */}
-      <div className="absolute inset-0 z-0 h-full w-full bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-size-[24px_24px]"></div>
-      <div className="absolute right-0 top-1/4 w-[500px] h-[500px] bg-primary/10 rounded-full blur-[120px] pointer-events-none" />
-      <div className="absolute left-0 bottom-1/4 w-[400px] h-[400px] bg-purple-500/10 rounded-full blur-[100px] pointer-events-none" />
 
       <div className="max-w-7xl mx-auto px-5 w-full relative z-10">
         <SectionHeading
@@ -81,11 +78,11 @@ const About = () => {
             transition={{ duration: 0.6, delay: 0.2 }}
             viewport={{ once: true }}
           >
-            <div className="p-8 rounded-3xl bg-white/60 dark:bg-slate-900/60 backdrop-blur-xl border border-slate-200 dark:border-slate-800 shadow-xl dark:shadow-2xl relative overflow-hidden group">
+            <div className="p-8 rounded-3xl bg-slate-900/95 backdrop-blur-sm border border-slate-800 shadow-2xl relative overflow-hidden group">
               {/* Subtle Gradient Hover */}
               <div className="absolute inset-0 bg-linear-to-br from-cyan-500/5 to-purple-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
 
-              <h3 className="relative text-2xl font-bold text-slate-800 dark:text-slate-100 mb-6">
+              <h3 className="relative text-2xl font-bold text-slate-100 mb-6">
                 Hello! I'm a{" "}
                 <span className="text-transparent bg-clip-text bg-linear-to-r from-cyan-500 to-purple-500">
                   Full Stack Developer
@@ -93,16 +90,16 @@ const About = () => {
                 navigating the world of modern web.
               </h3>
 
-              <div className="relative space-y-5 text-lg text-slate-600 dark:text-slate-400 leading-relaxed font-light">
+              <div className="relative space-y-5 text-lg text-slate-400 leading-relaxed font-light">
                 <p>
                   My journey started with a curiosity for building things that
                   live on the internet. Fast forward to today, I'm deeply
                   focused on the{" "}
-                  <strong className="font-medium text-slate-900 dark:text-slate-200">
+                  <strong className="font-medium text-slate-200">
                     Next.js ecosystem
                   </strong>{" "}
                   and the{" "}
-                  <strong className="font-medium text-slate-900 dark:text-slate-200">
+                  <strong className="font-medium text-slate-200">
                     MERN stack
                   </strong>
                   .
@@ -125,8 +122,8 @@ const About = () => {
               </div>
 
               {/* Tech Badges */}
-              <div className="relative mt-8 pt-6 border-t border-slate-200 dark:border-slate-800">
-                <p className="text-xs font-bold text-slate-500 dark:text-slate-500 mb-4 uppercase tracking-widest">
+              <div className="relative mt-8 pt-6 border-t border-slate-800">
+                <p className="text-xs font-bold text-slate-500 mb-4 uppercase tracking-widest">
                   Current Tech Stack
                 </p>
                 <div className="flex flex-wrap gap-2">
@@ -141,7 +138,7 @@ const About = () => {
                   ].map((tech) => (
                     <span
                       key={tech}
-                      className="px-3 py-1.5 bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-lg text-xs font-semibold text-slate-700 dark:text-slate-300 hover:border-cyan-500/50 hover:text-cyan-600 dark:hover:text-cyan-400 transition-colors cursor-default"
+                      className="px-3 py-1.5 bg-slate-800 border border-slate-700 rounded-lg text-xs font-semibold text-slate-300 hover:border-cyan-500/50 hover:text-cyan-400 transition-colors cursor-default"
                     >
                       {tech}
                     </span>
@@ -165,7 +162,7 @@ const About = () => {
                 <motion.div
                   key={index}
                   variants={itemVariants}
-                  className={`group relative p-5 rounded-2xl bg-white dark:bg-slate-900/60 border border-slate-200 dark:border-slate-800 transition-all duration-300 hover:shadow-lg hover:-translate-y-1 ${feature.border} overflow-hidden`}
+                  className={`group relative p-5 rounded-2xl bg-slate-900/60 border border-slate-800 transition-all duration-300 hover:shadow-lg hover:-translate-y-1 ${feature.border} overflow-hidden`}
                 >
                   <div
                     className={`absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-linear-to-r ${feature.bg
@@ -175,15 +172,15 @@ const About = () => {
 
                   <div className="relative flex items-center gap-5">
                     <div
-                      className={`p-3.5 rounded-xl ${feature.bg} ${feature.color} ring-1 ring-inset ring-black/5 dark:ring-white/5 shadow-sm group-hover:scale-110 transition-transform duration-300`}
+                      className={`p-3.5 rounded-xl ${feature.bg} ${feature.color} ring-1 ring-inset ring-white/5 shadow-sm group-hover:scale-110 transition-transform duration-300`}
                     >
                       {feature.icon}
                     </div>
                     <div>
-                      <h4 className="text-lg font-bold text-slate-800 dark:text-slate-100 group-hover:text-primary transition-colors">
+                      <h4 className="text-lg font-bold text-slate-100 group-hover:text-primary transition-colors">
                         {feature.title}
                       </h4>
-                      <p className="text-sm text-slate-500 dark:text-slate-400 mt-1">
+                      <p className="text-sm text-slate-400 mt-1">
                         {feature.description}
                       </p>
                     </div>
@@ -196,9 +193,9 @@ const About = () => {
             <motion.div variants={itemVariants} className="relative mt-8 group">
               <div className="absolute -inset-1 bg-linear-to-r from-cyan-500 to-purple-600 rounded-2xl blur opacity-25 group-hover:opacity-50 transition duration-1000"></div>
 
-              <div className="relative rounded-2xl bg-[#1e1e1e] dark:bg-[#0d1117] border border-slate-800 shadow-2xl overflow-hidden font-mono text-sm">
+              <div className="relative rounded-2xl bg-[#0d1117] border border-slate-800 shadow-2xl overflow-hidden font-mono text-sm">
                 {/* Window Header */}
-                <div className="flex items-center justify-between px-4 py-3 bg-[#252526] dark:bg-[#161b22] border-b border-slate-700/50">
+                <div className="flex items-center justify-between px-4 py-3 bg-[#161b22] border-b border-slate-700/50">
                   <div className="flex gap-2">
                     <div className="w-3 h-3 rounded-full bg-red-500/80" />
                     <div className="w-3 h-3 rounded-full bg-yellow-500/80" />

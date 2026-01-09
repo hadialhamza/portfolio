@@ -14,7 +14,7 @@ const SectionHeading = ({ icon: Icon, badgeText, title, highlight }) => {
         {Icon && <Icon size={14} />}
         {badgeText}
       </span>
-      <h2 className="text-4xl md:text-5xl font-bold tracking-tight text-slate-900 dark:text-white mb-4">
+      <h2 className="text-4xl md:text-5xl font-bold tracking-tight text-white mb-4">
         {title} <span className="gradient-text">{highlight}</span>
       </h2>
       <div className="w-60 h-1 bg-neon-gradient mx-auto rounded-full" />

@@ -19,6 +19,10 @@
   font-family: "Montserrat", sans-serif;
 }
 
+.section-contain {
+  contain: layout paint;
+}
+
 body {
   font-family: "Montserrat", sans-serif;
 }
@@ -51,13 +55,9 @@ body {
 }
 
 @layer components {
-  .glass {
-    @apply bg-white/5 backdrop-blur-xl border border-white/10 shadow-xl;
-  }
-
-  .glass-card {
-    @apply bg-white/5 backdrop-blur-xl border border-white/10 rounded-2xl shadow-2xl;
-  }
+  /* .glass-card {
+    @apply ;
+  } */
 
   /* Define neon colors with HSL for opacity manipulation */
   :root {
@@ -85,13 +85,15 @@ body {
   }
 
   .gradient-text {
-    @apply bg-gradient-to-r from-[var(--color-primary)] via-[var(--color-secondary)] to-[var(--color-primary)] bg-clip-text text-transparent bg-[length:200%_auto];
+    @apply bg-linear-to-r from-primary via-secondary to-primary bg-clip-text text-transparent bg-size-[200%_auto];
   }
 
   .bg-neon-gradient {
-    background: linear-gradient(to right,
-        var(--color-primary),
-        var(--color-secondary));
+    background: linear-gradient(
+      to right,
+      var(--color-primary),
+      var(--color-secondary)
+    );
   }
 
   .gradient-border {
@@ -104,9 +106,11 @@ body {
     inset: 0;
     padding: 1px;
     border-radius: inherit;
-    background: linear-gradient(135deg,
-        var(--color-primary),
-        var(--color-secondary));
+    background: linear-gradient(
+      135deg,
+      var(--color-primary),
+      var(--color-secondary)
+    );
     -webkit-mask: linear-gradient(#fff 0 0) content-box,
       linear-gradient(#fff 0 0);
     mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
@@ -115,8 +119,8 @@ body {
   }
 
   .typing-cursor::after {
-    content: "|";
-    @apply text-[var(--color-primary)] animate-pulse;
+    content: "/>";
+    @apply text-primary animate-pulse;
   }
 }
 
@@ -139,7 +143,6 @@ body {
 }
 
 @keyframes tilt {
-
   0%,
   100% {
     transform: rotate(0deg);
@@ -175,7 +178,6 @@ body {
 }
 
 @keyframes mouse-bounce {
-
   0%,
   100% {
     transform: translateY(0);
@@ -221,4 +223,73 @@ body {
 .pause-on-hover:hover .animate-marquee,
 .pause-on-hover:hover .animate-marquee-reverse {
   animation-play-state: paused;
+}
+
+@keyframes caret {
+  50% {
+    opacity: 0;
+  }
+}
+
+/* Subtle "shine" sweep over the text (dark-theme friendly) */
+.shine-text {
+  position: relative;
+  isolation: isolate;
+}
+
+.shine-text::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+
+  /* A thin bright band that sweeps across */
+  background: linear-gradient(
+    115deg,
+    transparent 0%,
+    rgba(255, 255, 255, 0) 42%,
+    rgba(255, 255, 255, 0.28) 50%,
+    rgba(255, 255, 255, 0) 58%,
+    transparent 100%
+  );
+
+  /* mask so the shine only appears on the text area */
+  mix-blend-mode: overlay;
+  opacity: 0.55;
+
+  transform: translateX(-110%);
+  animation: shine-sweep 3.2s ease-in-out infinite;
+}
+
+@keyframes shine-sweep {
+  0% {
+    transform: translateX(-110%);
+    opacity: 0;
+  }
+
+  10% {
+    opacity: 0.55;
+  }
+
+  55% {
+    opacity: 0.35;
+  }
+
+  100% {
+    transform: translateX(140%);
+    opacity: 0;
+  }
+}
+
+/* Pause shine on interaction (matches your "interact with user" rule) */
+.shine-paused::after {
+  animation-play-state: paused;
+}
+
+/* Respect reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .shine-text::after {
+    animation: none;
+    opacity: 0;
+  }
 }
