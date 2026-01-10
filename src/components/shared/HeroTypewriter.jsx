@@ -55,18 +55,18 @@ function useRotatingTypewriterState({
     cfg.current = { typeMs, deleteMs, holdMs };
   }, [typeMs, deleteMs, holdMs]);
 
-  // If the list changes and current index is out of range, clamp (not sync in effect)
-  useEffect(() => {
-    if (!list.length) return;
-    setWordIndex((i) => i % list.length);
-  }, [list.length]);
+  // Clamp wordIndex if list length changes
+  const clampedWordIndex = useMemo(() => {
+    if (!list.length) return 0;
+    return wordIndex >= list.length ? wordIndex % list.length : wordIndex;
+  }, [wordIndex, list.length]);
 
   useEffect(() => {
     if (!enabled || paused) return;
     if (!list.length) return;
     if (document.hidden) return;
 
-    const word = list[wordIndex % list.length];
+    const word = list[clampedWordIndex];
     const { typeMs: T, deleteMs: D, holdMs: H } = cfg.current;
 
     let t;
@@ -85,7 +85,7 @@ function useRotatingTypewriterState({
       if (charLen < word.length) {
         t = setTimeout(() => setCharLen((n) => n + 1), T);
       } else {
-        setHolding(true);
+        t = setTimeout(() => setHolding(true), 0);
       }
     } else {
       // deleting
@@ -93,15 +93,16 @@ function useRotatingTypewriterState({
         t = setTimeout(() => setCharLen((n) => n - 1), D);
       } else {
         // move to next word
-        setDir(1);
-        setWordIndex((i) => (i + 1) % list.length);
+        t = setTimeout(() => {
+          setDir(1);
+          setWordIndex((i) => (i + 1) % list.length);
+        }, 0);
       }
     }
 
     return () => clearTimeout(t);
-  }, [enabled, paused, list, wordIndex, charLen, dir, holding]);
-
-  const currentWord = list.length ? list[wordIndex % list.length] : "";
+  }, [enabled, paused, list, clampedWordIndex, charLen, dir, holding]);
+  const currentWord = list.length ? list[clampedWordIndex] : "";
   const text = currentWord.slice(0, charLen);
 
   return { text, hasWords: list.length > 0, firstWord: list[0] ?? "" };
@@ -150,7 +151,7 @@ export function HeroTypewriter({
       <span
         className={[
           "relative inline-block whitespace-nowrap",
-          "bg-gradient-to-r from-cyan-300 via-indigo-300 to-fuchsia-300",
+          "bg-linear-to-r from-cyan-300 via-indigo-300 to-fuchsia-300",
           "bg-clip-text text-transparent",
           "drop-shadow-[0_0_18px_rgba(99,102,241,0.22)]",
           "shine-text",
@@ -158,7 +159,7 @@ export function HeroTypewriter({
         ].join(" ")}
       >
         {shown}
-        <span className="pointer-events-none absolute -bottom-1 left-0 h-[2px] w-full bg-gradient-to-r from-transparent via-fuchsia-400/40 to-transparent blur-[1px]" />
+        <span className="pointer-events-none absolute -bottom-1 left-0 h-0.5 w-full bg-linear-to-r from-transparent via-fuchsia-400/40 to-transparent blur-[1px]" />
       </span>
 
       <span className="inline-block w-[1ch] text-fuchsia-200/90 animate-[caret_0.85s_step-end_infinite]">

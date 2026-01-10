@@ -57,10 +57,8 @@ const About = () => {
   return (
     <section
       id="about"
-      className="relative transition-colors duration-300 overflow-hidden section-contain"
+      className="relative pt-25 md:pt-30 pb-5 transition-colors duration-300 overflow-hidden section-contain"
     >
-      {/* Background Decor */}
-
       <div className="max-w-7xl mx-auto px-5 w-full relative z-10">
         <SectionHeading
           icon={User}
@@ -111,8 +109,11 @@ const About = () => {
                     AI-augmented workflows
                   </span>{" "}
                   and modern libraries like{" "}
-                  <span className="code-text">shadcn/ui</span> to create
-                  efficient, scalable, and visually stunning applications.
+                  <span className="font-mono bg-black/5 dark:bg-white/10 px-1 py-0.5 rounded text-[0.9em]">
+                    shadcn/ui
+                  </span>{" "}
+                  to create efficient, scalable, and visually stunning
+                  applications.
                 </p>
                 <p>
                   Currently, I'm polishing my skills in full-stack architecture
@@ -128,8 +129,8 @@ const About = () => {
                 </p>
                 <div className="flex flex-wrap gap-2">
                   {[
-                    "Next.js 14",
                     "React",
+                    "Next.js",
                     "Node.js",
                     "MongoDB",
                     "Tailwind CSS",
@@ -247,20 +248,6 @@ const About = () => {
           </motion.div>
         </div>
       </div>
-
-      {/* CSS Helper for code text if needed */}
-      <style jsx>{`
-        .code-text {
-          font-family: "Fira Code", monospace;
-          background-color: rgba(0, 0, 0, 0.05);
-          padding: 2px 4px;
-          border-radius: 4px;
-          font-size: 0.9em;
-        }
-        .dark .code-text {
-          background-color: rgba(255, 255, 255, 0.1);
-        }
-      `}</style>
     </section>
   );
 };

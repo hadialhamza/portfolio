@@ -4,7 +4,6 @@ import { ArrowUp } from "lucide-react";
 
 const ScrollNavigator = () => {
   const [isHeroVisible, setIsHeroVisible] = useState(true);
-  const [activeSection, setActiveSection] = useState("home");
   const [isAtBottom, setIsAtBottom] = useState(false);
 
   // Constants
@@ -25,8 +24,6 @@ const ScrollNavigator = () => {
 
   useEffect(() => {
     window.addEventListener("scroll", handleScroll);
-    // Initial check
-    handleScroll();
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 

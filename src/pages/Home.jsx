@@ -11,13 +11,11 @@ const Home = () => {
     <main>
       <GridBackground />
       <ScrollNavigator />
-      <div className="space-y-20 md:space-y-32">
-        <Hero />
-        <About />
-        <Skills />
-        <Projects />
-        <Contact />
-      </div>
+      <Hero />
+      <About />
+      <Skills />
+      <Projects />
+      <Contact />
     </main>
   );
 };

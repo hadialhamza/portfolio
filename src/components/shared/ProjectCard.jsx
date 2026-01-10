@@ -1,16 +1,16 @@
 import { motion } from "framer-motion";
-import { Github, ExternalLink, Folder } from "lucide-react";
+import { Github, ExternalLink, Folder, Eye } from "lucide-react";
 
-const ProjectCard = ({ project }) => {
+const ProjectCard = ({ project, onDetails }) => {
   return (
-    <div className="group w-full h-full relative">
+    <div className="group w-full max-w-[420px] h-full relative">
       {/* Background Gradient Glow Effect */}
       <div className="absolute -inset-2 bg-linear-to-r from-primary to-secondary rounded-2xl opacity-0 group-hover:opacity-50 blur transition duration-500" />
 
       {/* Card Container */}
       <div className="rounded-2xl relative z-10 overflow-hidden h-full flex flex-col transition-transform duration-300 group-hover:scale-102 bg-slate-900 border-slate-800 border">
         {/* Image Container */}
-        <div className="relative h-48 overflow-hidden">
+        <div className="relative h-64 overflow-hidden">
           <img
             src={project.image}
             alt={project.title}
@@ -22,14 +22,24 @@ const ProjectCard = ({ project }) => {
           <div className="absolute inset-0 bg-linear-to-t from-slate-900/80 via-transparent to-transparent opacity-60" />
 
           {/* Overlay Buttons */}
-          <div className="absolute inset-0 flex items-center justify-center gap-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-slate-900/50">
+          <div className="absolute inset-0 flex items-center justify-center gap-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-slate-900/60 backdrop-blur-[2px]">
+            <motion.button
+              onClick={onDetails}
+              className="p-3 rounded-full bg-cyan-500 text-white hover:bg-cyan-400 transition-colors shadow-lg shadow-cyan-500/20"
+              whileHover={{ scale: 1.1 }}
+              whileTap={{ scale: 0.9 }}
+              title="View Details"
+            >
+              <Eye size={20} />
+            </motion.button>
             <motion.a
               href={project.github}
               target="_blank"
               rel="noopener noreferrer"
-              className="p-3 rounded-full bg-primary text-slate-900 hover:opacity-90 transition-opacity"
+              className="p-3 rounded-full bg-slate-800 text-slate-300 hover:text-white hover:bg-slate-700 transition-colors border border-slate-700"
               whileHover={{ scale: 1.1 }}
               whileTap={{ scale: 0.9 }}
+              title="View Source Code"
             >
               <Github size={20} />
             </motion.a>
@@ -37,9 +47,10 @@ const ProjectCard = ({ project }) => {
               href={project.live}
               target="_blank"
               rel="noopener noreferrer"
-              className="p-3 rounded-full bg-secondary text-white hover:opacity-90 transition-opacity"
+              className="p-3 rounded-full bg-slate-800 text-slate-300 hover:text-white hover:bg-slate-700 transition-colors border border-slate-700"
               whileHover={{ scale: 1.1 }}
               whileTap={{ scale: 0.9 }}
+              title="View Live Site"
             >
               <ExternalLink size={20} />
             </motion.a>
@@ -56,7 +67,9 @@ const ProjectCard = ({ project }) => {
           </div>
 
           <p className="text-slate-400 text-sm mb-4 flex-1 leading-relaxed">
-            {project.description}
+            {project.description.length > 100
+              ? `${project.description.slice(0, 100)}...`
+              : project.description}
           </p>
 
           <div className="flex flex-wrap gap-2 mt-auto">

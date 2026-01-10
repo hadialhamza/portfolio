@@ -1,113 +1,11 @@
-import { Github, Linkedin, Mail } from "lucide-react";
 import { motion, useReducedMotion } from "framer-motion";
 import { LuCodeXml } from "react-icons/lu";
-import { SiMongodb, SiTailwindcss, SiNextdotjs } from "react-icons/si";
-import { TbBrandReact } from "react-icons/tb";
-import { FaNodeJs, FaGithub, FaDownload, FaFacebook } from "react-icons/fa";
+import { FaDownload } from "react-icons/fa";
 import { HeroTypewriter } from "../shared/HeroTypewriter";
 import { toast } from "sonner";
 import NeonButton from "../shared/NeonButton";
-import SocialButton from "../shared/SocialButton";
-
-const TechIcon = ({ icon: Icon, color, name, glowClass, href, download }) => {
-  const content = (
-    <>
-      <div
-        className={`absolute inset-0 rounded-xl blur opacity-60 group-hover:opacity-100 transition duration-200 ${glowClass}`}
-      ></div>
-      <div
-        className={`relative z-10 p-3 bg-slate-800 rounded-xl border border-slate-700 ${color} shadow-md hover:shadow-xl hover:-translate-y-1 transition-all duration-200 cursor-pointer`}
-      >
-        <Icon size={25} />
-      </div>
-      <span className="absolute -top-10 opacity-0 group-hover:opacity-100 transition-opacity duration-300 text-xs font-medium text-slate-300 bg-slate-800 px-2 py-1 rounded border border-slate-700 shadow-sm whitespace-nowrap">
-        {name}
-      </span>
-    </>
-  );
-
-  if (href) {
-    return (
-      <a
-        href={href}
-        target={download ? "_self" : "_blank"}
-        rel={download ? "" : "noopener noreferrer"}
-        download={download}
-        className="group relative flex flex-col items-center"
-      >
-        {content}
-      </a>
-    );
-  }
-
-  return (
-    <div className="group relative flex flex-col items-center">{content}</div>
-  );
-};
-
-const techStack = [
-  {
-    icon: SiNextdotjs,
-    name: "Next.js",
-    color: "text-white group-hover:text-gray-200",
-    glowClass: "bg-gradient-to-r from-gray-600 to-gray-400",
-  },
-  {
-    icon: TbBrandReact,
-    name: "React",
-    color: "text-sky-400 group-hover:text-sky-500",
-    glowClass: "bg-gradient-to-r from-sky-400 to-blue-500",
-  },
-  {
-    icon: SiTailwindcss,
-    name: "Tailwind",
-    color: "text-cyan-500 group-hover:text-cyan-600",
-    glowClass: "bg-gradient-to-r from-cyan-400 to-blue-400",
-  },
-  {
-    icon: FaNodeJs,
-    name: "Node.js",
-    color: "text-green-600 group-hover:text-green-700",
-    glowClass: "bg-gradient-to-r from-green-500 to-lime-500",
-  },
-  {
-    icon: SiMongodb,
-    name: "MongoDB",
-    color: "text-green-500 group-hover:text-green-600",
-    glowClass: "bg-gradient-to-r from-green-500 to-emerald-500",
-  },
-];
-
-const socialLinks = [
-  {
-    icon: FaGithub,
-    name: "GitHub",
-    href: "https://github.com/hadialhamza",
-    color: "text-slate-200 group-hover:text-white",
-    glowClass: "bg-gradient-to-r from-slate-400 to-slate-600",
-  },
-  {
-    icon: Linkedin,
-    name: "LinkedIn",
-    href: "https://linkedin.com/in/hadialhamza",
-    color: "text-blue-600 group-hover:text-blue-700",
-    glowClass: "bg-gradient-to-r from-blue-400 to-blue-600",
-  },
-  {
-    icon: FaFacebook,
-    name: "Facebook",
-    href: "https://facebook.com/hadialhamza",
-    color: "text-blue-600 group-hover:text-blue-700",
-    glowClass: "bg-gradient-to-r from-blue-500 to-indigo-600",
-  },
-  {
-    icon: Mail,
-    name: "Email",
-    href: "mailto:hamzaglory@gmail.com",
-    color: "text-red-500 group-hover:text-red-600",
-    glowClass: "bg-gradient-to-r from-red-400 to-red-600",
-  },
-];
+import GlowIconButton from "../shared/GlowIconButton";
+import { techStack, socialLinks } from "../../data/data";
 
 const Hero = () => {
   const shouldReduceMotion = useReducedMotion();
@@ -140,9 +38,9 @@ const Hero = () => {
   return (
     <section
       id="home"
-      className="relative min-h-screen flex items-center justify-center  overflow-hidden transition-colors duration-300 pt-32 md:pt-40 pb-20 md:pb-0 section-contain"
+      className="relative min-h-screen flex items-center justify-center overflow-hidden transition-colors duration-300 section-contain"
     >
-      <div className="relative z-10 max-w-7xl mx-auto px-5 w-full flex flex-col-reverse md:flex-row items-center gap-12 md:gap-16">
+      <div className="relative z-10 max-w-7xl mx-auto mt-25 md:mt-30 px-5 w-full flex flex-col-reverse md:flex-row items-center gap-10">
         <motion.div
           initial={{ opacity: 0, x: -30 }}
           animate={{ opacity: 1, x: 0 }}
@@ -207,14 +105,14 @@ const Hero = () => {
             AI-augmented workflows to solve real-world problems.
           </p>
 
-          {/* Tech Stack - Mapped */}
-          <div className="flex flex-wrap justify-center md:justify-start gap-4 mb-10">
+          {/* Tech Stack */}
+          <div className="flex flex-wrap justify-center md:justify-start gap-4 mb-8">
             {techStack.map((tech, index) => (
-              <TechIcon key={index} {...tech} />
+              <GlowIconButton key={index} {...tech} />
             ))}
           </div>
 
-          <div className="flex flex-col sm:flex-row items-center gap-5 w-full sm:w-auto">
+          <div className="flex flex-col-reverse sm:flex-row items-center gap-8 w-full sm:w-auto">
             <NeonButton
               href="/hamza-resume.pdf"
               download="Hadi_Al_Hamza_Resume.pdf"
@@ -225,10 +123,10 @@ const Hero = () => {
               Download Resume
             </NeonButton>
 
-            {/* Social Icons - Mapped with same styles */}
+            {/* Social Icons */}
             <div className="flex gap-4">
               {socialLinks.map((social, index) => (
-                <SocialButton key={index} {...social} />
+                <GlowIconButton key={index} {...social} />
               ))}
             </div>
           </div>
@@ -246,7 +144,6 @@ const Hero = () => {
             {/* 1. Rotating Border GLOW (Blurry) */}
             <div className="absolute -inset-2 rounded-2xl overflow-hidden blur-md opacity-60 group-hover:opacity-100 transition duration-500">
               <div className="absolute -inset-full bg-[conic-gradient(from_0deg,transparent_0_340deg,cyan_360deg)] animate-[spin_4s_linear_infinite] will-change-transform">
-                {/* Note: Using a conic gradient with hard stops to create a 'comet' effect or full rainbow */}
                 <div className="w-full h-full bg-[conic-gradient(from_90deg_at_50%_50%,#06b6d4_0%,#a855f7_50%,#a855f7_100%,#06b6d4_100%)]"></div>
               </div>
             </div>
@@ -254,7 +151,6 @@ const Hero = () => {
             {/* 2. Rotating Border LINE (Sharp) */}
             <div className="absolute -inset-0.5 rounded-2xl overflow-hidden z-0">
               <div className="absolute -inset-full animate-[spin_4s_linear_infinite] will-change-transform">
-                {/* This creates the rotating gradient */}
                 <div className="w-full h-full bg-[conic-gradient(from_90deg_at_50%_50%,#06b6d4_0%,#a855f7_50%,#a855f7_100%,#06b6d4_100%)]"></div>
               </div>
             </div>

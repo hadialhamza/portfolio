@@ -1,5 +1,5 @@
-const SocialButton = ({
-  icon: Icon,
+const GlowIconButton = ({
+  icon,
   href,
   label,
   name,
@@ -8,7 +8,7 @@ const SocialButton = ({
   download,
   onClick,
 }) => {
-  // Allow label or name prop
+  const Icon = icon;
   const tooltipText = label || name;
 
   const content = (
@@ -57,4 +57,4 @@ const SocialButton = ({
   );
 };
 
-export default SocialButton;
+export default GlowIconButton;

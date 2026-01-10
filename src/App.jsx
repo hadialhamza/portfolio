@@ -1,7 +1,7 @@
 import { Toaster } from "sonner";
-import Navbar from "./components/layout/Navbar";
 import Footer from "./components/layout/Footer";
 import Home from "./pages/Home";
+import Navbar from "./components/layout/navbar/Navbar";
 
 function App() {
   return (
