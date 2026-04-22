@@ -15,15 +15,20 @@ const NavContent = ({ isScrolled, activeSection, handleNavClick }) => {
           <div className="absolute inset-0 bg-cyan-500/20 blur-xl rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
 
           {!isScrolled ? (
-            <img
-              src="/hamza-logo.webp"
-              alt="Hadi Al Hamza"
-              className="h-full w-auto object-contain z-10 drop-shadow-[0_0_8px_rgba(34,211,238,0.3)] group-hover:drop-shadow-[0_0_12px_rgba(34,211,238,0.5)] group-hover:brightness-110 transition-all duration-300"
-            />
+            <>
+              <img
+                src="/my-logo.png"
+                alt="Hadi Al Hamza"
+                className="h-full w-auto object-contain z-10 drop-shadow-[0_0_8px_rgba(34,211,238,0.3)] group-hover:drop-shadow-[0_0_12px_rgba(34,211,238,0.5)] group-hover:brightness-110 transition-all duration-300"
+              />
+              <h2 className="text-2xl font-bold text-primary uppercase ml-2">
+                HADI al hamza
+              </h2>
+            </>
           ) : (
             <div className="h-10 w-10 -ml-2.5 scale-130 rounded-full bg-slate-900 border border-slate-700 flex items-center justify-center p-1 shadow-md shadow-cyan-500/20 z-10 transition-all duration-300 group-hover:border-primary/90 group-hover:bg-slate-800/80 group-hover:scale-[1.45]">
               <img
-                src="/logo.webp"
+                src="/my-logo.png"
                 alt="Hadi Al Hamza"
                 className="h-full w-full object-contain drop-shadow-[0_0_5px_rgba(34,211,238,0.5)]"
               />
@@ -34,8 +39,9 @@ const NavContent = ({ isScrolled, activeSection, handleNavClick }) => {
 
       {/* Desktop Menu Items */}
       <div
-        className={`hidden md:flex gap-4 items-center ${isScrolled ? "mx-auto" : "ml-auto"
-          }`}
+        className={`hidden md:flex gap-4 items-center ${
+          isScrolled ? "mx-auto" : "ml-auto"
+        }`}
       >
         {navItems.map((item, index) => {
           const isActive = activeSection === item.name.toLowerCase();
@@ -46,10 +52,11 @@ const NavContent = ({ isScrolled, activeSection, handleNavClick }) => {
               initial="idle"
               whileHover="hover"
               animate={isActive ? "hover" : "idle"}
-              className={`flex items-center gap-1.5 text-sm tracking-wider transition-colors duration-300 relative group cursor-pointer ${isActive
+              className={`flex items-center gap-1.5 text-sm tracking-wider transition-colors duration-300 relative group cursor-pointer ${
+                isActive
                   ? "text-primary font-semibold"
                   : "text-slate-200 hover:text-primary"
-                }`}
+              }`}
             >
               {/* Icon Reveal Animation */}
               <motion.span
@@ -102,10 +109,11 @@ const NavContent = ({ isScrolled, activeSection, handleNavClick }) => {
               <button
                 key={item.name}
                 onClick={() => handleNavClick(item.name.toLowerCase())}
-                className={`transition-all duration-300 relative group cursor-pointer flex flex-col items-center justify-center p-1 ${isActive
+                className={`transition-all duration-300 relative group cursor-pointer flex flex-col items-center justify-center p-1 ${
+                  isActive
                     ? "text-primary scale-110"
                     : "text-slate-200 hover:text-primary hover:scale-110"
-                  }`}
+                }`}
                 aria-label={item.name}
               >
                 <item.icon size={22} />

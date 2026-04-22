@@ -31,7 +31,7 @@ const Footer = () => {
           <div className="md:col-span-5 space-y-6">
             <h3 className="text-3xl font-bold tracking-tighter text-primary">
               <img
-                src="/hamza-logo.webp"
+                src="/my-logo.png"
                 alt="Hadi Al Hamza"
                 className="h-10 w-auto object-contain"
               />
