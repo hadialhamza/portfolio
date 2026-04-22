@@ -1,170 +1,60 @@
-import { useEffect, useMemo, useRef, useState } from "react";
-
-function usePrefersReducedMotion() {
-  const [reduced, setReduced] = useState(false);
-
-  useEffect(() => {
-    const mq = window.matchMedia?.("(prefers-reduced-motion: reduce)");
-    if (!mq) return;
-    const onChange = () => setReduced(mq.matches);
-    onChange();
-    mq.addEventListener?.("change", onChange);
-    return () => mq.removeEventListener?.("change", onChange);
-  }, []);
-
-  return reduced;
-}
-
-function useInView(ref, { threshold = 0.35, rootMargin = "0px" } = {}) {
-  const [inView, setInView] = useState(false);
-
-  useEffect(() => {
-    const el = ref.current;
-    if (!el) return;
-
-    const io = new IntersectionObserver(
-      ([entry]) => setInView(entry.isIntersecting),
-      { threshold, rootMargin }
-    );
-
-    io.observe(el);
-    return () => io.disconnect();
-  }, [threshold, rootMargin, ref]);
-
-  return inView;
-}
-
-function useRotatingTypewriterState({
-  words,
-  enabled,
-  paused,
-  typeMs = 55,
-  deleteMs = 32,
-  holdMs = 950,
-}) {
-  const list = useMemo(() => (words || []).filter(Boolean), [words]);
-
-  const [wordIndex, setWordIndex] = useState(0);
-  const [charLen, setCharLen] = useState(0);
-  const [dir, setDir] = useState(1); // 1 = typing, -1 = deleting
-  const [holding, setHolding] = useState(false);
-
-  // keep config in ref so effect doesn't restart constantly
-  const cfg = useRef({ typeMs, deleteMs, holdMs });
-  useEffect(() => {
-    cfg.current = { typeMs, deleteMs, holdMs };
-  }, [typeMs, deleteMs, holdMs]);
-
-  // Clamp wordIndex if list length changes
-  const clampedWordIndex = useMemo(() => {
-    if (!list.length) return 0;
-    return wordIndex >= list.length ? wordIndex % list.length : wordIndex;
-  }, [wordIndex, list.length]);
-
-  useEffect(() => {
-    if (!enabled || paused) return;
-    if (!list.length) return;
-    if (document.hidden) return;
-
-    const word = list[clampedWordIndex];
-    const { typeMs: T, deleteMs: D, holdMs: H } = cfg.current;
-
-    let t;
-
-    // Hold at full word before deleting
-    if (holding) {
-      t = setTimeout(() => {
-        setHolding(false);
-        setDir(-1);
-      }, H);
-      return () => clearTimeout(t);
-    }
-
-    if (dir === 1) {
-      // typing
-      if (charLen < word.length) {
-        t = setTimeout(() => setCharLen((n) => n + 1), T);
-      } else {
-        t = setTimeout(() => setHolding(true), 0);
-      }
-    } else {
-      // deleting
-      if (charLen > 0) {
-        t = setTimeout(() => setCharLen((n) => n - 1), D);
-      } else {
-        // move to next word
-        t = setTimeout(() => {
-          setDir(1);
-          setWordIndex((i) => (i + 1) % list.length);
-        }, 0);
-      }
-    }
-
-    return () => clearTimeout(t);
-  }, [enabled, paused, list, clampedWordIndex, charLen, dir, holding]);
-  const currentWord = list.length ? list[clampedWordIndex] : "";
-  const text = currentWord.slice(0, charLen);
-
-  return { text, hasWords: list.length > 0, firstWord: list[0] ?? "" };
-}
+import { useState, useEffect } from "react";
+import { motion, AnimatePresence } from "motion/react";
 
 export function HeroTypewriter({
-  words = [
-    "MERN Stack Projects",
-    "Next.js Applications",
-    "Modern User Interfaces",
-  ],
+  words = ["SaaS Applications", "Healthcare Platforms", "AI-Powered Tools", "Next.js & MERN Stack"],
 }) {
-  const wrapRef = useRef(null);
-  const inView = useInView(wrapRef, { threshold: 0.35 });
-  const prefersReduced = usePrefersReducedMotion();
+  const [index, setIndex] = useState(0);
 
-  // pause on interaction
-  const [paused, setPaused] = useState(false);
-
-  const { text, firstWord } = useRotatingTypewriterState({
-    words,
-    enabled: inView && !prefersReduced,
-    paused,
-    typeMs: 55,
-    deleteMs: 32,
-    holdMs: 950,
-  });
-
-  // If reduced motion, render static text (no state syncing)
-  const shown = prefersReduced ? firstWord : text;
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setIndex((prev) => (prev + 1) % words.length);
+    }, 3500);
+    return () => clearInterval(interval);
+  }, [words.length]);
 
   return (
-    <span
-      ref={wrapRef}
-      className="inline-flex items-baseline gap-2 outline-none"
-      onMouseEnter={() => setPaused(true)}
-      onMouseLeave={() => setPaused(false)}
-      onFocus={() => setPaused(true)}
-      onBlur={() => setPaused(false)}
-      onTouchStart={() => setPaused(true)}
-      onTouchEnd={() => setPaused(false)}
-      tabIndex={0}
-      role="text"
-      aria-label={shown}
-    >
-      <span
-        className={[
-          "relative inline-block whitespace-nowrap",
-          "bg-linear-to-r from-cyan-300 via-indigo-300 to-fuchsia-300",
-          "bg-clip-text text-transparent",
-          "drop-shadow-[0_0_18px_rgba(99,102,241,0.22)]",
-          "shine-text",
-          paused ? "shine-paused" : "",
-        ].join(" ")}
-      >
-        {shown}
-        <span className="pointer-events-none absolute -bottom-1 left-0 h-0.5 w-full bg-linear-to-r from-transparent via-fuchsia-400/40 to-transparent blur-[1px]" />
+    <span className="inline-flex items-center gap-1">
+      <span className="relative inline-block whitespace-nowrap pr-1">
+        <AnimatePresence mode="wait">
+          <motion.span
+            key={index}
+            initial="hidden"
+            animate="visible"
+            exit="exit"
+            variants={{
+              visible: { transition: { staggerChildren: 0.05 } },
+              exit: { transition: { staggerChildren: 0.03, staggerDirection: -1 } },
+            }}
+            className="inline-block"
+          >
+            {words[index].split("").map((char, i) => (
+              <motion.span
+                key={`${index}-${i}`}
+                variants={{
+                  hidden: { opacity: 0, y: 15, scale: 0.8, filter: "blur(4px)" },
+                  visible: { opacity: 1, y: 0, scale: 1, filter: "blur(0px)" },
+                  exit: { opacity: 0, y: -10, scale: 0.9, filter: "blur(4px)" },
+                }}
+                transition={{ type: "spring", stiffness: 200, damping: 15 }}
+                className={[
+                  "inline-block",
+                  "bg-linear-to-r from-cyan-400 via-indigo-400 to-primary",
+                  "bg-clip-text text-transparent drop-shadow-[0_0_12px_rgba(6,182,212,0.4)]",
+                ].join(" ")}
+              >
+                {char === " " ? "\u00A0" : char}
+              </motion.span>
+            ))}
+          </motion.span>
+        </AnimatePresence>
       </span>
-
-      <span className="inline-block w-[1ch] text-fuchsia-200/90 animate-[caret_0.85s_step-end_infinite]">
-        |
-      </span>
+      {/* Blinking Cursor */}
+      <motion.span
+        animate={{ opacity: [1, 0, 1] }}
+        transition={{ duration: 0.8, repeat: Infinity, ease: "linear" }}
+        className="inline-block w-[3px] h-[1em] bg-primary shadow-[0_0_8px_rgba(6,182,212,0.8)] rounded-full"
+      />
     </span>
   );
 }

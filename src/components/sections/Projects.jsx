@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion, AnimatePresence } from "motion/react";
 import { FolderOpen } from "lucide-react";
 import ProjectCard from "../shared/ProjectCard";
 import SectionHeading from "../shared/SectionHeading";

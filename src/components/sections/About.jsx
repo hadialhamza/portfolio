@@ -1,5 +1,5 @@
 import React from "react";
-import { motion } from "framer-motion";
+import { motion } from "motion/react";
 import { Code2, Zap, Layout, User, Terminal } from "lucide-react";
 import SectionHeading from "../shared/SectionHeading";
 

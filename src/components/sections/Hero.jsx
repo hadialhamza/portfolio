@@ -1,4 +1,4 @@
-import { motion, useReducedMotion } from "framer-motion";
+import { motion, useReducedMotion } from "motion/react";
 import { LuCodeXml } from "react-icons/lu";
 import { FaDownload } from "react-icons/fa";
 import { HeroTypewriter } from "../shared/HeroTypewriter";
@@ -82,9 +82,10 @@ const Hero = () => {
                   <span className="hidden md:inline">
                     <HeroTypewriter
                       words={[
-                        "MERN Stack Projects",
-                        "Next.js Applications",
-                        "Modern User Interfaces",
+                        "SaaS Applications",
+                        "Healthcare Platforms",
+                        "AI-Powered Tools",
+                        "Next.js & MERN Stack",
                       ]}
                     />
                   </span>
@@ -95,14 +96,14 @@ const Hero = () => {
           </div>
 
           <p className="text-base md:text-lg text-slate-400 max-w-2xl leading-relaxed mb-8">
-            An enthusiastic developer focusing on the{" "}
-            <span className="font-semibold text-slate-200">Next.js</span>{" "}
-            ecosystem and{" "}
-            <span className="font-semibold text-slate-200">MERN Stack</span>. I
-            am constantly learning and building full-stack applications with
-            modern tools like{" "}
-            <span className="text-primary font-medium">shadcn/ui</span> and
-            AI-augmented workflows to solve real-world problems.
+            Full Stack Developer with{" "}
+            <span className="font-semibold text-slate-200">
+              7+ deployed Next.js and MERN applications
+            </span>
+            , highlighted by SaaS tools, a comprehensive blood donation platform,
+            and a team-built fitness tracker. Proven ability to{" "}
+            <span className="text-primary font-medium">architect core systems</span>
+            , integrate secure payments/auth, and drive clean Git/GitHub team workflows.
           </p>
 
           {/* Tech Stack */}

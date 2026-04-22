@@ -1,4 +1,4 @@
-import { motion } from "framer-motion";
+import { motion } from "motion/react";
 import NeonButton from "../../shared/NeonButton";
 import { navItems } from "../../../data/data";
 import { FiMail } from "react-icons/fi";
