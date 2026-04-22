@@ -1,15 +1,13 @@
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "motion/react";
 
-export function HeroTypewriter({
-  words = ["SaaS Applications", "Healthcare Platforms", "AI-Powered Tools", "Next.js & MERN Stack"],
-}) {
+export function HeroTypewriter({ words = [] }) {
   const [index, setIndex] = useState(0);
 
   useEffect(() => {
     const interval = setInterval(() => {
       setIndex((prev) => (prev + 1) % words.length);
-    }, 3500);
+    }, 4000);
     return () => clearInterval(interval);
   }, [words.length]);
 
@@ -23,8 +21,10 @@ export function HeroTypewriter({
             animate="visible"
             exit="exit"
             variants={{
-              visible: { transition: { staggerChildren: 0.05 } },
-              exit: { transition: { staggerChildren: 0.03, staggerDirection: -1 } },
+              visible: { transition: { staggerChildren: 0.035 } },
+              exit: {
+                transition: { staggerChildren: 0.015, staggerDirection: -1 },
+              },
             }}
             className="inline-block"
           >
@@ -32,11 +32,21 @@ export function HeroTypewriter({
               <motion.span
                 key={`${index}-${i}`}
                 variants={{
-                  hidden: { opacity: 0, y: 15, scale: 0.8, filter: "blur(4px)" },
+                  hidden: {
+                    opacity: 0,
+                    y: 15,
+                    scale: 0.8,
+                    filter: "blur(4px)",
+                  },
                   visible: { opacity: 1, y: 0, scale: 1, filter: "blur(0px)" },
                   exit: { opacity: 0, y: -10, scale: 0.9, filter: "blur(4px)" },
                 }}
-                transition={{ type: "spring", stiffness: 200, damping: 15 }}
+                transition={{
+                  type: "spring",
+                  stiffness: 200,
+                  damping: 15,
+                  filter: { type: "tween", duration: 0.3 },
+                }}
                 className={[
                   "inline-block",
                   "bg-linear-to-r from-cyan-400 via-indigo-400 to-primary",
@@ -49,12 +59,6 @@ export function HeroTypewriter({
           </motion.span>
         </AnimatePresence>
       </span>
-      {/* Blinking Cursor */}
-      <motion.span
-        animate={{ opacity: [1, 0, 1] }}
-        transition={{ duration: 0.8, repeat: Infinity, ease: "linear" }}
-        className="inline-block w-[3px] h-[1em] bg-primary shadow-[0_0_8px_rgba(6,182,212,0.8)] rounded-full"
-      />
     </span>
   );
 }
