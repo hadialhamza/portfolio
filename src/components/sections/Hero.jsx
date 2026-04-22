@@ -12,7 +12,7 @@ const Hero = () => {
 
   const handleDownload = (e) => {
     e.preventDefault();
-    const downloadPromise = fetch("/hamza-resume.pdf")
+    const downloadPromise = fetch("/Hadi_Al_Hamza_Full_Stack_Developer.pdf")
       .then((response) => {
         if (!response.ok) throw new Error("Network response was not ok");
         return response.blob();
@@ -21,7 +21,7 @@ const Hero = () => {
         const url = window.URL.createObjectURL(blob);
         const link = document.createElement("a");
         link.href = url;
-        link.setAttribute("download", "Hadi_Al_Hamza_Resume.pdf");
+        link.setAttribute("download", "Hadi_Al_Hamza_Full_Stack_Developer.pdf");
         document.body.appendChild(link);
         link.click();
         link.parentNode.removeChild(link);
