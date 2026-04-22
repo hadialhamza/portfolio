@@ -1,5 +1,5 @@
 import { Cpu, Layout, Server, Wrench } from "lucide-react";
-import { motion } from "framer-motion";
+import { motion } from "motion/react";
 import SectionHeading from "../shared/SectionHeading";
 import { frontend, backend, tools } from "../../data/data";
 import SkillCard from "../shared/SkillCard";

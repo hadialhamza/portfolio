@@ -1,4 +1,4 @@
-import { motion } from "framer-motion";
+import { motion } from "motion/react";
 import { Github, ExternalLink, Folder, Eye } from "lucide-react";
 
 const ProjectCard = ({ project, onDetails }) => {

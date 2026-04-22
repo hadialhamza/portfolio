@@ -1,5 +1,5 @@
 import React, { useRef, useState } from "react";
-import { motion, useInView } from "framer-motion";
+import { motion, useInView } from "motion/react";
 import { Field, Label, Input, Textarea } from "@headlessui/react";
 import {
   Mail,

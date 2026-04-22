@@ -1,4 +1,4 @@
-import { motion, useReducedMotion } from "framer-motion";
+import { motion, useReducedMotion } from "motion/react";
 import { LuCodeXml } from "react-icons/lu";
 import { FaDownload } from "react-icons/fa";
 import { HeroTypewriter } from "../shared/HeroTypewriter";
@@ -73,36 +73,40 @@ const Hero = () => {
           </motion.h1>
 
           <div className="h-10 md:h-12 mb-3 text-xl md:text-2xl font-medium text-slate-400">
-            &lt; I build{" "}
-            <span className="text-slate-200 font-semibold">
-              {shouldReduceMotion ? (
-                "Modern Web Applications"
-              ) : (
-                <>
-                  <span className="hidden md:inline">
-                    <HeroTypewriter
-                      words={[
-                        "MERN Stack Projects",
-                        "Next.js Applications",
-                        "Modern User Interfaces",
-                      ]}
-                    />
-                  </span>
-                  <span className="md:hidden">Modern Web Applications</span>
-                </>
-              )}
-            </span>
+            {shouldReduceMotion ? (
+              <>Crafting Modern Web Experiences</>
+            ) : (
+              <>
+                <span className="hidden md:inline">
+                  <HeroTypewriter
+                    words={[
+                      "Developing Next.js & MERN Projects",
+                      "Architecting SaaS Applications",
+                      "Innovating AI-Powered Tools",
+                      "Engineering Healthcare Platforms",
+                      "Building E-commerce Solutions",
+                    ]}
+                  />
+                </span>
+                <span className="md:hidden">
+                  Crafting Modern Web Experiences
+                </span>
+              </>
+            )}
           </div>
 
           <p className="text-base md:text-lg text-slate-400 max-w-2xl leading-relaxed mb-8">
-            An enthusiastic developer focusing on the{" "}
-            <span className="font-semibold text-slate-200">Next.js</span>{" "}
-            ecosystem and{" "}
-            <span className="font-semibold text-slate-200">MERN Stack</span>. I
-            am constantly learning and building full-stack applications with
-            modern tools like{" "}
-            <span className="text-primary font-medium">shadcn/ui</span> and
-            AI-augmented workflows to solve real-world problems.
+            Full Stack Developer with{" "}
+            <span className="font-semibold text-slate-200">
+              7+ deployed Next.js and MERN applications
+            </span>
+            , highlighted by SaaS tools, a comprehensive blood donation
+            platform, and a team-built fitness tracker. Proven ability to{" "}
+            <span className="text-primary font-medium">
+              architect core systems
+            </span>
+            , integrate secure payments/auth, and drive clean Git/GitHub team
+            workflows.
           </p>
 
           {/* Tech Stack */}
